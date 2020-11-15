@@ -25,10 +25,10 @@
     spanArray.push(span);    
   }
 
-
+  // center span where print head starts
   let currentIndex = (gridSize / 2) + (gridLen / 2);
-  // spanArray[currentIndex].style.backgroundColor = "black";
-  // Difference in span index as print head moves 
+
+  // Difference in span index as print head moves, we'll cycle through the array with modulus to get our spiral
   let north = -gridLen;
   let south = +gridLen;
   let east = 1;
@@ -39,44 +39,37 @@
   let currentDirection = 0;  
   // spans left to check before turning
   let stepsRemaining = 1;
+  // "paths" will be each straight side of the spiral
   let pathLength = 1;
+  // This accounts for initial tight spiralling required when paths are length 1
   let pathsTraversed = -1;
 
-  // Step through natural numbers
+  // Step through the natural numbers
   for (let i = 1; i <= gridSize; i += 1) {
 
-    // If reached end of straight, change direction by cycling through directionalIndexSteps, reset steps remaining
+    // If print head reaches the end of a straight path, change direction (by cycling through directionalIndexSteps array), and reset steps remaining to path length
+
+    // If steps remaining = 0, print head is at the end of a path. Log that with pathsTraversed.
     if (stepsRemaining === 0) {
       pathsTraversed += 1;
+
+      // When print head has traversed 2 paths/sides of the spiral, increase the path length 
       if (pathsTraversed % 2 === 1) {
         pathLength += 1;
       }
+      // Change direction, reset steps remaining
       currentDirection = (currentDirection + 1) % 4;
       stepsRemaining = pathLength;
     }
 
     // apply prime class
-      if (prime(i)) {
-        spanArray[currentIndex].classList.add("prime");
-      }
-      // Move printhead
-      currentIndex += directionalIndexSteps[currentDirection];
-      stepsRemaining -= 1;
-        
+    if (prime(i)) {
+      spanArray[currentIndex].classList.add("prime");
+    }
+    // Move printhead
+    currentIndex += directionalIndexSteps[currentDirection];
+    stepsRemaining -= 1;
   }
-
-  // defining the center span
-  // let center = (gridLen * (gridLen) / 2) + (gridLen / 2);
-  // spanArray[center].classList.add("prime");
-  // spanArray[center - gridLen].classList.add("prime");
-  // spanArray[center - gridLen + 1].classList.add("prime");
-  // spanArray[center - gridLen + 1 + gridLen].classList.add("prime");
-  // spanArray[center - gridLen + 1 + gridLen + gridLen].classList.add("prime");
-
-  // if (spanArray[i] has classlist where num of classlist is prime) {
-    // apply prime styling
-    //spanArray[i].classList.add("prime");
-  // }
 
   // Append span array elements to fragment, to send back to DOM 
   let fragment = d.createDocumentFragment();
