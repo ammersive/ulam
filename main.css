@@ -1,18 +1,26 @@
+.page-header > * {
+  text-align: center;
+}
+
+h1 {
+  font-size: 8rem;
+}
+
 span {
   float: left;
   box-sizing: border-box;
   background-color: rgb(200, 249, 232);
-  border: 1px solid #fff;
-  height: 10px;
-  width: 10px;
+  /* border: 1px solid #fff; */
+  height: 6px;
+  width: 6px;
 }
 
-.pixels {
-  width: 1000px;
-  height: 1000px;
-  margin-bottom: 6rem;
+.grid {
+  width: 600px;
+  height: 600px;
+  margin: 6rem auto;
 }
 
-.prime-colour {
+.prime {
   background-color: crimson;
 }

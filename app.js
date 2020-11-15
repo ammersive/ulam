@@ -1,6 +1,5 @@
 (d => {
 
-
   // Prime number function
   let prime = num => {
     let isPrime = true; 
@@ -16,43 +15,28 @@
     return isPrime;
   }  
 
-  // // prime function works
-  // console.log(prime(3));
-  // console.log(prime(7));
-  // console.log(prime(8));
-  // console.log(prime(13));
-
-  //build spans : working  
-  // for (var i=0;i<10000;i+=1) {
-  //   pixels.append(d.createElement("span"));
-  // }  
-
+  // Build an array of span elements
+  let gridSize = 10000;
   let spanArray = []; 
 
-  for (let j = 1; j < 10000; j += 1) {
+  for (let i = 0; i < gridSize; i += 1) {
     span = d.createElement("span");
     spanArray.push(span);    
   }
-  console.log(spanArray);
 
-  for (let k = 1; k < 100; k += 1) {
-    // fine
-    if (k % 3 === 0) {
-    // NOT FINE  
-    // if (true) {
-    // if (i % 3 === 0) {
-    // if (prime(i)){
-      console.log(prime(k)); // fine
-      // spanArray[i].classList.add("prime-colour");
+  // Apply colour class to spans where span index + 1 is prime (accounting for 0 indexing)
+  for (let i = 0; i < gridSize; i += 1) {
+    if (prime(i + 1)){
+      spanArray[i].classList.add("prime");
     }
   }  
-  // console.log(spanArray);
 
+  // Append span array elements to fragment, to send back to DOM 
   let fragment = d.createDocumentFragment();
-  for (let i = 1; i < spanArray.length - 1; i += 1) {
+  for (let i = 0; i < spanArray.length; i += 1) {
     fragment.append(spanArray[i]);
   }  
 
-  pixels.append(fragment);
+  grid.append(fragment);
 
 })(document);
