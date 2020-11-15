@@ -6,6 +6,16 @@ h1 {
   font-size: 8rem;
 }
 
+p {
+  max-width: 500px;
+  margin: 3rem auto;
+}
+
+section p {
+  margin-bottom: 6rem;
+  text-align: right;
+}
+
 span {
   float: left;
   box-sizing: border-box;

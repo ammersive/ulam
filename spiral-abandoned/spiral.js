@@ -44,8 +44,10 @@
   // This accounts for initial tight spiralling required when paths are length 1
   let pathsTraversed = -1;
 
+  spanArray[currentIndex].style.backgroundColor = "blue";
+
   // Step through the natural numbers
-  for (let i = 1; i <= gridSize; i += 1) {
+  for (let i = 1; i <= 100; i += 1) {
 
     // If print head reaches the end of a straight path, change direction (by cycling through directionalIndexSteps array), and reset steps remaining to path length
 
@@ -62,10 +64,26 @@
       stepsRemaining = pathLength;
     }
 
-    // apply prime class
-    if (prime(i)) {
-      spanArray[currentIndex].classList.add("prime");
+    console.log("current direction :", currentDirection, " - steps remaining: ", stepsRemaining);
+
+    
+    if (currentDirection === 0) {
+      spanArray[currentIndex].style.borderLeft = "1px solid red";
+    } else if (currentDirection === 1) {
+      spanArray[currentIndex].style.borderTop = "1px solid red";
+      if (stepsRemaining === pathLength) {
+        spanArray[currentIndex].style.borderLeft = "1px solid red";
+      }
+    } else if (currentDirection === 2) {
+      spanArray[currentIndex].style.borderRight = "1px solid red";
+      if (stepsRemaining === pathLength) {
+        spanArray[currentIndex].style.borderLeft = "1px solid red";
+      }
+    } else {
+      spanArray[currentIndex].style.borderBottom = "1px solid red";
     }
+
+
     // Move printhead
     currentIndex += directionalIndexSteps[currentDirection];
     stepsRemaining -= 1;
