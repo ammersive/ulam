@@ -18,38 +18,32 @@
   //   pixels.append(d.createElement("span"));
   // }  
 
+  
   let fragment = d.createDocumentFragment();
 
-  for (var i=0;i<100;i+=1) {
-    span = d.createElement("span")
-    if (prime(i)) {
-    // if (i % 2 === 0){  
-      span.style.backgroundColor = "red";
-    } 
-    fragment.append(span);
-  } 
+  let spanArray = []; 
 
-  pixels.append(fragment);
+  for (var i = 1; i < 10; i += 1) {
+    span = d.createElement("span");
+    if (i % 2 === 0){
+    // if (prime(i)){
+      span.classList.add("prime-colour");
+    }
+    spanArray.push(span);    
+  }
 
-  // // get main
-  // let main = d.getElementById("pixels");
+  console.log(spanArray);
 
   
-  // let numbers = [];  
-
-  // let fragment = d.createDocumentFragment();
-  // let main = d.getElementById("main");
-
-  // // build spans  
-  // for (var i=0; i<10000; i+=1) {    
-  //   numbers.push(i);          
-  // } 
-  // console.log(numbers);
-
-  // // let span = d.createElement("span");
-  // // console.log(numbers);
 
 
+
+
+  
+  // fragment.append(span);  
+  // pixels.append(fragment);
+  // // get main
+  // let main = d.getElementById("pixels");
 
   // // fragment.append(span);
   // // main.append(fragment);
