@@ -12,3 +12,7 @@ span {
   height: 1000px;
   margin-bottom: 6rem;
 }
+
+.prime-colour {
+  background-color: crimson;
+}
