@@ -25,16 +25,9 @@
     spanArray.push(span);    
   }
 
-  // Apply colour class to spans where span index + 1 is prime (accounting for 0 indexing)
-  // for (let i = 0; i < gridSize; i += 1) {
-  //   if (prime(i + 1)){
-  //     spanArray[i].classList.add("prime");
-  //   }
-  // }  
 
   let currentIndex = (gridSize / 2) + (gridLen / 2);
-  console.log(currentIndex);
-
+  // spanArray[currentIndex].style.backgroundColor = "black";
   // Difference in span index as print head moves 
   let north = -gridLen;
   let south = +gridLen;
@@ -43,22 +36,33 @@
   let directionalIndexSteps = [north, east, south, west];
 
   // Current direction of travel for print head (used to determine direction of travel in directionalIndexSteps)
-  let currentDirection = 0; 
-  
+  let currentDirection = 0;  
+  // spans left to check before turning
+  let stepsRemaining = 1;
+  let pathLength = 1;
+  let pathsTraversed = -1;
+
   // Step through natural numbers
-  for (let i = 1; i <= 100; i += 1) {
-    // spans checked before printhead changes direction 
-    let spansRepeated = Math.floor((i + 1) / 2);
-    for (let j = 1; j <= spansRepeated; j += 1) {
+  for (let i = 1; i <= gridSize; i += 1) {
+
+    // If reached end of straight, change direction by cycling through directionalIndexSteps, reset steps remaining
+    if (stepsRemaining === 0) {
+      pathsTraversed += 1;
+      if (pathsTraversed % 2 === 1) {
+        pathLength += 1;
+      }
+      currentDirection = (currentDirection + 1) % 4;
+      stepsRemaining = pathLength;
+    }
+
+    // apply prime class
       if (prime(i)) {
-        console.log(spanArray[currentIndex]);
         spanArray[currentIndex].classList.add("prime");
       }
       // Move printhead
       currentIndex += directionalIndexSteps[currentDirection];
-    }
-    // Change direction by cycling through directionalIndexSteps
-    currentDirection = (currentDirection + 1) % 4;
+      stepsRemaining -= 1;
+        
   }
 
   // defining the center span
