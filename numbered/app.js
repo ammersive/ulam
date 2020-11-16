@@ -22,6 +22,9 @@
   let west = -1;
   let directionalIndexSteps = [north, west, south, east];
 
+  let colours = ["red", "orange", "yellow", "green", "paleblue", "blue", "purple", "brown"];
+  let currentColour = 0;
+
   // Current direction of travel for print head (used to determine direction of travel in directionalIndexSteps)
   let currentDirection = 0;  
   // spans left to check before turning
@@ -45,12 +48,16 @@
       // Change direction, reset steps remaining
       currentDirection = (currentDirection + 1) % 4;
       stepsRemaining = pathLength;
+
+      currentColour = (currentColour + 1) % colours.length;
     }
 
     iString = String(i);
     spanArray[currentIndex].textContent = iString;
 
-    // Move printhead
+    spanArray[currentIndex].style.backgroundColor = colours[currentColour % colours.length];
+
+    // Move printhead one square in current direction
     currentIndex += directionalIndexSteps[currentDirection];
     stepsRemaining -= 1;
   }
