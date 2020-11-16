@@ -13,11 +13,6 @@
   // The position of the print head, starting in the center
   let currentIndex = (gridSize / 2) + (gridLength / 2);  
 
-  // For colouring paths
-  let iString = "";
-  let colours = ["#A0246B", "#D45D6C", "#EEC531", "#F2E260", "#BEF577", "#6AE93F", "#39DDF4", "#289DF4"];
-  let currentColour = 0;
-
   // Directions: differences in span indexes as the print head moves
   let up = -gridLength;
   let down = +gridLength;
@@ -48,16 +43,11 @@
       // Change direction and reset steps remaining
       currentDirection = (currentDirection + 1) % 4;
       stepsRemaining = pathLength;
-
-      // Change span colour
-      currentColour = (currentColour + 1) % colours.length;
     }
 
     // Print a number to the current span 
     iString = String(i);
     spanArray[currentIndex].textContent = iString;
-    // Colour the current span according to current path colour
-    spanArray[currentIndex].style.backgroundColor = colours[currentColour % colours.length];
 
     // Move print head one square in current direction
     currentIndex += directions[currentDirection];
