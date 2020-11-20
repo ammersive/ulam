@@ -6,8 +6,15 @@
   let spanArray = []; 
 
   for (let i = 0; i < gridSize; i += 1) {
-    span = d.createElement("span");
+    span = d.createElement("span");    
     span.textContent = String(i);
+    switch (i) {
+      case 55 : span.classList.add("current"); break;
+      case 56 : span.classList.add("right"); break;
+      case 54 : span.classList.add("left"); break;
+      case 45 : span.classList.add("up"); break;
+      case 65 : span.classList.add("down"); break;
+    }
     spanArray.push(span);    
   }
 

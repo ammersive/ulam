@@ -23,6 +23,23 @@ span {
   margin: 6rem auto;
 }
 
-.prime {
-  background-color: crimson;
+/* ["#A0246B", "#D45D6C", "#EEC531", "#F2E260", "#BEF577", "#6AE93F", "#39DDF4", "#289DF4"]; */
+.current {
+  background-color: #df3897;
+}
+
+.right {
+  background-color: #c68dff;
+}
+
+.left {
+  background-color: #ca94ff;
+}
+
+.up {
+  background-color: #9494ff;
+}
+
+.down {
+  background-color: #8abfff;
 }
