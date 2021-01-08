@@ -23,16 +23,18 @@ section p {
 span {
   float: left;
   box-sizing: border-box;
-  background-color: rgb(200, 249, 232);
-  height: 20px;
-  width: 20px;
+  /* background-color: rgb(200, 249, 232); */
+  border: 1px solid rgb(4, 68, 58);
+  height: 30px;
+  width: 30px;
   text-align: center;
-  padding: 1px;
+  padding: 2px;
+  font-size: 15px;
 }
 
 .grid {
-  width: 400px;
-  height: 400px;
+  width: 180px;
+  height: 180px;
   margin: 6rem auto;
 }
 

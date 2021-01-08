@@ -1,7 +1,7 @@
 (d => {
 
   // Build an array of span elements
-  let gridLength = 20;
+  let gridLength = 6;
   let gridSize = gridLength * gridLength;
   let spanArray = []; 
 
@@ -48,6 +48,11 @@
     // Print a number to the current span 
     iString = String(i);
     spanArray[currentIndex].textContent = iString;
+
+    // Decrement the g and b colour values to highlight the spiral visually
+    let b = (255 - (i * 7));
+    let g = (255 - (i * 7));    
+    spanArray[currentIndex].style.backgroundColor=`rgb(200, ${g}, ${b})`;
 
     // Move print head one square in current direction
     currentIndex += directions[currentDirection];
