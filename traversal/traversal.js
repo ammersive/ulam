@@ -24,6 +24,6 @@
     fragment.append(spanArray[i]);
   }  
 
-  grid.append(fragment);
+  traGrid.append(fragment);
 
 })(document);

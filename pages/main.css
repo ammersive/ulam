@@ -1,0 +1,12 @@
+.build p, .build ol li {
+  font-size: 1.8rem;
+}
+
+.build-article {
+  width: 60rem;
+  margin: 0rem auto;
+}
+
+.code {
+  font-family: monospace;
+}

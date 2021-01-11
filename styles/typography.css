@@ -1,0 +1,63 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  line-height: 1.4rem;
+  color: rgb(34, 27, 22);
+}
+
+.page-header {
+
+}
+
+h1 {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 4rem;
+  line-height: 6rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 3rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+h3 {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 2rem;
+  line-height: 3rem;
+  margin: 2rem 0rem 1rem 0rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+ol.list {
+  list-style-type: decimal;
+  margin-left: 3rem;
+  margin-bottom: 1rem;
+}
+
+ul.questions {
+  list-style: disc;
+  margin-left: 3rem;
+  margin-bottom: 1rem;
+}
+
+.terminal {  
+  background-color: black;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.terminal .code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  list-style-type: decimal;
+  color: aquamarine;
+  margin-left: 3rem;
+}

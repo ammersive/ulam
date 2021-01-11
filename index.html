@@ -6,22 +6,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ulam Spiral</title>
   <meta name="description" content="">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="./main.css">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&family=IBM+Plex+Mono&family=Poppins:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./styles/main.css">
   <script defer src="./app.js"></script>
 </head>
 
-<body class="container">
-  <header class="page-header">
-      <h1>Ulam spiral</h1>
-      <h2>100 x 100 grid</h2>
-      <p>If we spiral outwards from the center of the grid, colouring in each square that represents a prime number, those prime squares appear to align mysteriously along the diagonals...</p>
-  </header>
+<body>
+  <section class="container">
 
-  <main id="grid" class="grid"></main>
+    <article class="article">
 
-  <section>
-    <p>More on the <a href="https://en.wikipedia.org/wiki/Ulam_spiral">Ulam spiral</a></p>
+      <header class="page-header">
+        <h1>Ulam spiral</h1>
+      </header>
+
+      <p>An Ulam spiral is a way to order the natural numbers numbers which visually demonstrates areas with a high density of primes. Prime numbers are demarcated by red cells in the grid below.</p>
+      
+      <div id="mainGrid" class="main-grid"></div> 
+
+      <p>"Wait! Don't prime numbers famously elude capture by neat mathematical formulae? Why should any particular layout of the number system generate the appearance of <em>order amongst the primes</em>?" I hear you cry. Good question! Whilst some areas of high prime density is expected (more <a href="https://en.wikipedia.org/wiki/Ulam_spiral" target="_blank">here</a>), the extent of the patterns you are seeing with your very own eyes in the image below represent regularity that no current mathematical formula has yet fully captured.</p>
+      
+      <p>Want to know more? Read <a href="./pages/build.html">this</a> on the build and project motivations.</p> 
+
+    </article>
+
   </section>
 
 </body>

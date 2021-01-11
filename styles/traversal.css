@@ -1,45 +1,37 @@
-.page-header > * {
-  text-align: center;
+.tra-grid {
+  width: 300px;
+  height: 300px;
+  margin: 2rem auto;
 }
 
-h1 {
-  font-size: 8rem;
-}
-
-span {
+.tra-grid span {
   float: left;
   box-sizing: border-box;
   background-color: rgb(200, 249, 232);
   border: 1px solid rgb(4, 68, 58);
   height: 30px;
   width: 30px;
+  font-size: 15px;
   text-align: center;
-  padding: 2px;
+  padding-top: 6px;
 }
 
-.grid {
-  width: 300px;
-  height: 300px;
-  margin: 6rem auto;
-}
-
-/* ["#A0246B", "#D45D6C", "#EEC531", "#F2E260", "#BEF577", "#6AE93F", "#39DDF4", "#289DF4"]; */
-.current {
+.tra-grid .current {
   background-color: #df3897;
 }
 
-.right {
+.tra-grid .right {
   background-color: #c68dff;
 }
 
-.left {
+.tra-grid .left {
   background-color: #ca94ff;
 }
 
-.up {
+.tra-grid .up {
   background-color: #9494ff;
 }
 
-.down {
+.tra-grid .down {
   background-color: #8abfff;
 }

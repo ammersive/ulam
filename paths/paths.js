@@ -70,6 +70,6 @@
     fragment.append(spanArray[i]);
   }  
 
-  grid.append(fragment);
+  pathsGrid.append(fragment);
 
 })(document);

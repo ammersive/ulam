@@ -5,19 +5,209 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ulam Spiral</title>
-  <meta name="description" content="">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="../main.css">
-  <script defer src="./app.js"></script>
+  <meta name="description" content="">  
+
+  <script defer src="../traversal/traversal.js"></script>
+  <script defer src="../spiral-nums/spiral-nums.js"></script>
+  <script defer src="../paths/paths.js"></script>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&family=IBM+Plex+Mono&family=Poppins:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../styles/main.css">
+
 </head>
 
-<body class="container">
-  <header class="page-header">
-      <h1>Building a Javascript Ulam spiral</h1>
-      <h2>Designing the spiraling algorithm and broader project motivations</h2>
-      <p><i>Write up on the build to be published by 11th Jan 2021, please come back then! :)</i></p>
-      <p><a href="https://ammersive.github.io/ulam/">back</a></p>
-  </header>
+<body>
+  <section class="container">
 
+    <article class="article">
+
+      <header class="page-header">
+          <h1>Building a Javascript Ulam spiral</h1>
+          <h2>Designing the spiraling algorithm and broader project motivations</h2>
+          <p><a href="https://ammersive.github.io/ulam/">back</a></p>
+      </header>
+
+      <p>Prime numbers (those that are divisible by only themselves and one) are mathematically wild. Unlike, say, the even numbers, the primes famously elude the capture and discipline of a neat mathematical formula. Compare: For any given even number, we have a tidy formula from which we can tell where we’ll find the next even number, it’s just n + 2. Not so for the primes. Take your favourite prime number. Maybe it’s 3, or 17, or even 65537. There is currently no known generalisable mathematical statement from which we can derive how far up the sequence of natural (whole) numbers, the next prime lies.</p> 
+
+      <p>So, are the primes scattered at random through the sequence of natural numbers? No! There’s some difficult maths we can do to reveal that order and predictability pervades at least some subsets of the primes, but there’s actually a much easier little conjuring trick we can perform to unveil a series of sequences and patters that dwell amongst the primes, which even that difficult maths itself cannot wholly explain – and – we can do it using just coloured pencils and graph paper!</p> 
+
+      <p>In principle, at least. For whilst this conjuring trick is easy, it certainly is repetitive. Here’s the deal. Put your pencil in the middle of the graph paper and write a “1”. Go up one square and write “2”. Go left and write “3”. Keep going, inputting the next number to the next square, working in a tight spiral around 1 until you have something that looks like this:</p>  
+
+      <div id="spiGrid" class="spi-grid"></div>
+
+      <p>Now, go around again, but this time, every time you find a prime number, colour in that square. If you have the patience to do this for all of the cells in, say, a 100 x 100 grid, you will witness the emergence of a haunting and beautiful pattern, in which many of the prime numbers – far more than would be expected by chance, and far more than for a number series that is truly, untameably wild –  line up in long diagonal stretches that criss-cross the page.</p> 
+
+      <p>Alas, dear reader. I do not have this patience. But, I have always had a deep desire to generate for myself the mysterious Ulam spiral (first discovered by mathematician Stanisław Ulam in 1963, and popularized by Martin Gardner) in some way. The precise way became clear last year as I decided to retrain as a web developer: I could get my computer to do the colouring in bit for me.</p>
+
+      <p>There are three stages to the project:</p>
+      
+      <ol class="list">
+        <li>Create a grid of squares, where we have control over the colour of the squares.</li> 
+        <li>Write a bit of code that can identify if a number is prime</li>
+        <li>Write a bit of code that specifies the spiralling movement across the grid</li>
+      </ol>
+      
+      <p>Let's get started!</p>
+
+      <h3>Building the grid</h3>
+
+      <p>I’ve chosen to go with a 100 x 100 grid, which means we need to create 10,000 grid squares. We’ll be using the HTML equivalent of a square, an element called a <em>span</em>. We can then use the styling language CSS to tell these spans how big and what colour to be. So, from now on I’ll talk about “spans” – just think of them as squares that we can display on a webpage.</p> 
+
+      <p>We want each span to be pretty much identical except for whether or not they are coloured in. So, here’s our first job for Javascript, the programming language we’ll be using to get the main logic into the project. Let’s first declare some variables – words that will store the values of important data that we’ll want to reuse in the project. We said that the grid would be 100 spans wide/high, so we’ll store that value in a gridLength variable, which we can multiply by itself to get the total number of spans in the grid (gridSize), which will also be an important value to keep track of for later. Now let’s make lots of spans!</p>
+
+      <div class="terminal">
+        <ol class="code">
+          <li>let gridLength = 100;</li>
+          <li>let gridSize = gridLength * gridLength;</li>
+          <li>let spanArray = [];</li>
+          <li>for (let i = 0; i < gridSize; i += 1) {</li>
+          <li>&nbsp; span = d.createElement("span");</li>
+          <li>&nbsp; spanArray.push(span);</li>    
+          <li>}</li>
+        </ol>
+      </div> 
+
+      <p>The main “making” action happens on line 4, the line that starts with the word “for”, up to line 7. We have here a fundamental computing procedure known as a loop (in this case, a “for loop”), which allows us perform some given operation over and over again, until some condition is met. The operation running inside this loop (lines 5 and 6) is just about interpretable in plain English – it basically says: create a span, and then put that span inside a thing we’re calling spanArray. An array is a way to store data. It’s a container where we can keep the spans together, and use them later. Line four is the bit that specifies how many spans we should make: start a count at 0, and then make a span, and every time we make a span, plus one to this count. Repeat this procedure over and over, stopping when the count count reaches the number stored in the variable gridSize, which is 10,000.</p>
+
+      <p>We now have 10,000 spans, stored in a list and ready to go. That was quick! We still need to do a bit of styling to get things looking grid-like. For one thing, need to actually put them on our page, but we’ll do that right at the end when we’ve done the prime number bit. At present, these spans won’t have any dimensions, or colours, which they will need if we want to actually see them on our page. We can fix that with some CSS. Let’s first make a container to house our spans giving it a width and a height neatly divisible by 100, since we chose to have 100 spans per row/column.</p>
+      
+      <div class="terminal">
+        <ol class="code">
+          <li>.main-grid {</li> 
+          <li>&nbsp; width: 600px;</li> 
+          <li>&nbsp; height: 600px;</li>
+          <li>}</li>         
+        </ol>
+      </div> 
+
+      <p>Then we can tell each span element to be one-hundredth of the total grid height and length, they’ll fit nicely then. By default, the spans want to stack on top of each other, in a long line vertically down the page. “float: left” tells them to fill the first row, sitting next to each other until they reach the edge of the grid, and then fill the next row… and so on. We’ll also give them a nice minty colour so we can see them.</p> 
+
+      <div class="terminal">
+        <ol class="code">
+          <li>span {</li>
+          <li>&nbsp; height: 6px;</li>
+          <li>&nbsp; width: 6px;</li>  
+          <li>&nbsp; box-sizing: border-box;</li>
+          <li>&nbsp; float: left;</li>
+          <li>&nbsp; background-color: rgb(200, 249, 232);</li>  
+          <li>}</li>        
+        </ol>
+      </div> 
+
+      <p>Even though we have made a grid here, for now it will look like a big minty square because the spans have no borders to differentiate them. We want it to be this way, since the thing we want to differentiate is the prime squares, which we’ll do later, but we can add a temporary border style to check things are as they should be with “border: solid 1 px blue;” for instance. This is also why we’ve set the box-sizing to border-box, so the addition of a test border won’t increase the size of the spans.</p>
+
+      <p>Let’s get colouring in some primes!</p>
+
+      <h3>Prime checker function</h3>
+
+      <p>Before we tell Javascript to get out its coloured pencils and go to town on our grid, we need a way to work out, for any given number: is that number a prime? I’m going to do this with a function, a reusable bit of code that allows us ask that same question, but feed in any number of different values (which is useful, because there are quite a lot of numbers out there…). Here it is:</p>
+
+      <div class="terminal">
+        <ol class="code">
+          <li>let prime = num => {</li>
+          <li>&nbsp; let isPrime = true;</li> 
+          <li>&nbsp; if (num <= 1) {</li>
+          <li>&nbsp; &nbsp; isPrime = false;</li>
+          <li>&nbsp; } else {</li> 
+          <li>&nbsp; &nbsp; for (i = 2; i <= (num / 2); i += 1) {</li>
+          <li>&nbsp; &nbsp; &nbsp; if (num % i === 0) {</li>
+          <li>&nbsp; &nbsp; &nbsp; &nbsp; isPrime = false;</li>
+          <li>&nbsp; &nbsp; &nbsp; }</li>
+          <li>&nbsp; &nbsp; }</li>   
+          <li>&nbsp; }</li>    
+          <li>&nbsp; return isPrime;</li>
+          <li>}</li>        
+        </ol>
+      </div>
+      
+      <p>Here’s how it works in essence: By default, say that the number that we feed in (call this the “target” number) IS a prime. Give that answer back – unless that target number is found to be divisible by some other number – then confirm it’s not a prime. For loops are back - this time allowing us to check all the possible factors between 2 and half of the target number - because the lowest number that could be a factor that we are interested in is 2, and the highest one we need to check is half the target number – you can’t have a factor that’s bigger than half the target, so let’s not bother checking more than that.</p>
+
+      <p>After line 6 sets up this loop for us, line 7 does the mathsy bit. This line basically asks “if you divide the target number by the (possible) factor we’re currently checking, do you get a remainder of zero?”. Note that Javascript doesn’t read “%” as “percent”. In fact, it’s a modulo operator, and will give you the remainder from a division operation. We use it here because, if you can divide the target number by another (greater than 1) number and there’s no remainder, then the target number isn’t prime. If this is the case, we can move onto the next line, which is the line that ensures our function will now return the answer: “false”. However, if we loop through all the possible factors with line 6, and never find the condition on line 7 to be true, that means we’ve found a prime, and the function will return the answer “true”.</p>
+
+      <p>You use the prime function by “calling” it, anywhere else in the code below, and passing in the number you want to know about, like this:</p>
+
+      <div class="terminal">
+        <p class="code">
+          > prime(9);<br>
+          false<br>
+          <br>
+          > prime(13);<br>
+          true<br>
+          </p>
+      </div>  
+
+      <p>We can also pass in some pretty big numbers:</p>
+
+      <div class="terminal">
+        <p class="code">
+          > prime(479001599);<br>
+          true<br>
+          <br>
+          > prime(389472933);<br>
+          false<br>
+          </p>
+      </div> 
+      
+      <p>Unfortunately my computer doesn’t have enough memory to check the likes of such illustrious primes as 393050634124102232869567034555427371542904833 (yes that <a href="https://en.wikipedia.org/wiki/List_of_prime_numbers" target="_blank">really is</a> a prime) or 11111111111111111111111 (<a href="https://en.wikipedia.org/wiki/List_of_prime_numbers" target="_blank">same</a>) with my prime function, but if it did, in principle, my function should be able to give us an answer.</p>
+
+      <p>With our prime function working, let’s work out how to make a spiral!</p>
+
+      <h3>The layout of the spiral</h3>
+
+      <p>A disclaimer before we dive into the spiralling algorithm: Because I am assuming that you, dear reader, are a human, and not the JavaScript engine, this part lends itself to a narrative that does not precisely follow the order of the code itself from top to bottom. For brevity, I won’t discuss explicitly how and when every variable is declared and initialised. I think it will be easier to understand why we’d want to store a particular value if we encounter it already at work in the ecosystem of the algorithm. So, if you’re interested in getting the full scoop on where variables are declared, and with what initial values, as well as the precise scope everything lies within, do check the code itself <a href="https://github.com/ammersive/ulam" target="_blank">here</a> as you read.</p>
+
+      <p>Recall that this is how we want the natural numbers to map to a spiral in our grid.</p>
+
+      <!-- <div id="spiGrid" class="spi-grid"></div> -->
+
+      <p>Now, picture a print head that starts on a central span, that we’ll imagine represents the first of the natural numbers, as above, and which moves over the grid, checking spans in ascending order, and colouring those it finds to harbour primes. We’re not really going to program a print head, it’s just a useful metaphor for thinking about the problem. This metaphorical print head has three questions for us:</p>
+
+      <ul class="questions">
+        <li>How do I check if the current span is prime, and colour it in if so?</li>
+        <li>How do I move to a neighbouring span?</li>
+        <li>How do I change direction when a corner of the spiral is reached?</li>
+      </ul>  
+
+      <p>Let’s start answering those questions.</p>
+
+      <h3>Moving around the grid</h3>
+
+      <p>Remember that the spans will be laid out in the grid like words on a page – left to right, starting from the top. As we pushed them into an array, we can access them via their indexes. We can get the index of a central cell to start our spiral with the following:</p>
+
+      <div class="terminal">
+        <p class="code">let currentIndex = (gridSize / 2) + (gridLength / 2);</p>
+      </div> 
+
+      <p>That’s basically Javascript for “go half way down, and half way across, and call that position the current index”. Then, to effectively “move” one cell to the right, we plus 1 to the current index. To move one left, we minus 1. Vertical movement is just like skipping a whole line - to move one down, we skip forward by as many cells as the grid is wide, and to move up, we skip backwards by that same number.</p>
+
+      <p>You can see this with the 10 x 10 grid below. The print head moves around the indexes of the spans, which I’ve written into the below grid. If it’s currently at the span with an index of 55, then it can move one square to the right by moving to the span with an index of 55 + 1. To move one square up from 55, we minus the total grid length (which in this case is 10) and we can move onto the span with the index of 45.</p>
+
+      <div id="traGrid" class="tra-grid"></div>
+
+      <p>You might notice that the first span has an index of 0. We also started at 0 in our first for loop. Why? Computers generally count things starting at 0, it means common mathematical operations <a href="https://www.johndcook.com/blog/2008/06/26/why-computer-scientists-count-from-zero/" target="_blank">use less memory</a>, which was important in the early days of computing when memory was scarce. These days, for the sort of computing I’ve been doing, at least, there’s more than enough memory to go around to start counting at 1, but optimisation considerations are still important for larger or more numerous sets of operations, and so the 0 indexing tradition has continued, at least in the C based programming languages – the family of languages to which Javascript belongs.</p>
+
+      <p>Back to the grid. We can move around the grid by making modifications to the current index with:</p>
+
+      <div class="terminal">
+        <p class="code">
+          let right = 1;<br>
+          let left = -1;<br>          
+          let down = +gridLength;<br>
+          let up = - gridLength;<br>
+          <br>
+          let directions = [up, left, down, right];
+          </p>
+      </div> 
+
+      <p><em>...More to come...</em></p>
+
+
+      <div id="pathsGrid" class="paths-grid"></div>
+
+    </article>
+    
+  <section>  
 </body>
 </html>

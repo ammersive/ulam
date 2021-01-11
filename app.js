@@ -76,6 +76,6 @@
     fragment.append(spanArray[i]);
   }  
 
-  grid.append(fragment);    
+  mainGrid.append(fragment);    
 
 })(document);

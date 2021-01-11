@@ -65,6 +65,6 @@
     fragment.append(spanArray[i]);
   }  
 
-  grid.append(fragment);
+  spiGrid.append(fragment);
 
 })(document);
