@@ -26,3 +26,9 @@ html {
   padding: 0.75rem;
   padding-bottom: 3rem;
 }
+
+.fib {
+  display: block;
+  width: 20%;
+  margin: 0rem auto;
+}

@@ -26,10 +26,10 @@
 
       <header class="page-header">
           <h1>Building a Javascript Ulam spiral</h1>
-          <p><a href="https://ammersive.github.io/ulam/">back</a></p>
+          <p class="author">by <a href="https://ammersive.github.io/portfolio/" target="_blank" rel="noopener noreferrer">Sophie Stammers</a></p>
       </header>
 
-      <p>Prime numbers (those that are divisible by only themselves and one) are mathematically wild. Unlike, say, the even numbers, the primes famously elude the capture and discipline of a neat mathematical formula. Compare: For any given even number, we have a tidy formula from which we can tell where we’ll find the next even number, it’s just n + 2. Not so for the primes. Take your favourite prime number. Maybe it’s 3, or 17, or even 65537. There is currently no known generalisable mathematical statement from which we can derive how far up the sequence of natural (whole) numbers, the next prime lies.</p> 
+      <p>Prime numbers (those that are divisible by only themselves and one) are mathematically wild. Unlike, say, the even numbers, the primes famously elude the capture and discipline of a neat mathematical formula. Compare: For any given even number, we have a tidy formula from which we can tell where we’ll find the next even number, it’s just n + 2. Not so for the primes. Take your favourite prime number. Maybe it’s 3, or 17, or even 65537. There is currently no known generalisable mathematical statement from which we can derive how far up the sequence of natural (whole) numbers the next prime lies.</p> 
 
       <p>So, are the primes scattered at random through the sequence of natural numbers? No! There’s some difficult maths we can do to reveal that order and predictability pervades at least some subsets of the primes, but there’s actually a much easier little conjuring trick we can perform to unveil a series of sequences and patters that dwell amongst the primes, which even that difficult maths itself cannot wholly explain – and – we can do it using just coloured pencils and graph paper!</p> 
 
@@ -221,7 +221,7 @@
         </p>
       </div> 
 
-      <p>The body of the condition basically says: apply a style class (“prime”) to that span. We deal with the actual colouring elsewhere in our linked CSS style file (there, the “prime” class is basically to add a red colour). It’s not loads of styling, and we could have handled it here in the JavaScript file, but in general, it’s good to separate out styling concerns and the logic concerns, even if the code is only minimal. If anyone wanted to update the overall colour scheme of the page (…I’m not a designer, so no offense taken!) they don’t really want to have to pick through the JavaScript algorithms to do that. </p>
+      <p>The body of the condition basically says: apply a style class (“prime”) to that span. We deal with the actual colouring elsewhere in our linked CSS style file (there, the “prime” class is basically to add a dark green colour). It’s not loads of styling, and we could have handled it here in the JavaScript file, but in general, it’s good to separate out styling concerns and the logic concerns, even if the code is only minimal. If anyone wanted to update the overall colour scheme of the page (…I’m not a designer, so no offense taken!) they don’t really want to have to pick through the JavaScript algorithms to do that. </p>
 
       <p>Secondly, we need to move the print head over one span in the current direction of travel. We do this by assigning a new value to the <span class="inline-code">currentIndex</span>. <span class="inline-code">currentDirection</span> is a number that corresponds to one of the elements in our directions array. I’ll discuss how we set it in just a moment.</p>
 
@@ -242,7 +242,7 @@
 
       <div id="pathsGrid" class="paths-grid"></div>
 
-      <p>Perhaps you spotted that the paths increase by one span on every other turn of the spiral. In other words, every other time the print head traverses one of these paths and turns 90 degrees anti-clockwise, the length of the next two paths increases by 1. That’s quite a straight forward relationship.</p>
+      <p>Perhaps you spotted that the paths <strong>increase in length by one</strong> span on <strong>every other turn</strong> of the spiral. In other words, every other time the print head traverses one of these paths and turns 90 degrees anti-clockwise, the length of the next two paths increases by 1. That’s quite a straight forward relationship.</p>
 
       <p>We now need a way to take note of the number of spans left to check on the current path before the print head needs to turn, and a way to keep note of the current path length. We’ll do the former with that (not so) ominous variable <span class="inline-code">stepsRemaining</span>, and the latter with another variable, <span class="inline-code">pathsTraversed</span>.</p>
 
@@ -315,7 +315,8 @@
 
       <div class="terminal">
         <p class="code">
-          (d => {          
+          (d => {<br>
+            &nbsp; <span class="comment">// Prime function</span><br>          
             &nbsp; let prime = num => {<br>
             &nbsp;&nbsp; let isPrime = true;<br> 
             &nbsp;&nbsp; if (num <= 1) {<br>
@@ -330,7 +331,7 @@
             &nbsp;&nbsp; return isPrime;<br>
             &nbsp; }<br> 
             <br>
-            &nbsp; // Build an array of span elements<br>
+            &nbsp; <span class="comment">// Build an array of span elements</span><br>
             &nbsp; let gridLength = 100;<br>
             &nbsp; let gridSize = gridLength * gridLength;<br>
             &nbsp; let spanArray = [];<br> 
@@ -340,54 +341,53 @@
             &nbsp; &nbsp; spanArray.push(span);<br>    
             &nbsp; }<br>
             <br>
-            &nbsp; // The position of the print head, starting in the center<br>
+            &nbsp; <span class="comment">// The position of the print head, starting in the center</span><br>
             &nbsp; let currentIndex = (gridSize / 2) + (gridLength / 2);<br>  
             <br>
-            &nbsp; // Directions: differences in span indexes as the print head moves<br>
+            &nbsp; <span class="comment">// Directions: differences in span indexes as the print head moves</span><br>
             &nbsp; let up = -gridLength;<br>
             &nbsp; let down = +gridLength;<br>
             &nbsp; let right = 1;<br>
             &nbsp; let left = -1;<br>
             &nbsp; let directions = [up, left, down, right];<br>
             <br>
-            &nbsp; // Current direction of travel of the print head<br>
+            &nbsp; <span class="comment">// Current direction of travel of the print head</span><br>
             &nbsp; let currentDirection = 0;<br>  
-            &nbsp; // Spans left to check before turning<br>
+            &nbsp; <span class="comment">// Spans left to check before turning</span><br>
             &nbsp; let stepsRemaining = 1;<br>
-            &nbsp; // A path is the total straight side of the spiral<br> 
-            &nbsp; before a turn is made<br>
+            &nbsp; <span class="comment">// A path is the total straight side of the spiral before a turn is made</span><br> 
             &nbsp; let pathLength = 1;<br>
-            &nbsp; // This accounts for tight spiraling at the start of the loop (it should not increment until two directional turns)<br>
+            &nbsp; <span class="comment">// This accounts for tight spiraling at the start of the loop (it should not increment until two directional turns)</span><br>
             &nbsp; let pathsTraversed = -1;<br>
             <br>
-            &nbsp; // Step through the natural numbers<br>
+            &nbsp; <span class="comment">// Step through the natural numbers</span><br>
             &nbsp; for (let i = 1; i <= gridSize; i += 1) {<br>
             <br>
-            &nbsp; &nbsp; // If no steps remain, the print head is at the end of a path. Log that with pathsTraversed.<br>
+            &nbsp; &nbsp; <span class="comment">// If no steps remain, the print head is at the end of a path. Log that with pathsTraversed.</span><br>
             &nbsp; &nbsp; if (stepsRemaining === 0) {<br>
             &nbsp; &nbsp; &nbsp; pathsTraversed += 1;<br>
             <br>
-            &nbsp; &nbsp; &nbsp; &nbsp; // On paths of an odd number, increase the path length<br> 
+            &nbsp; &nbsp; &nbsp; &nbsp; <span class="comment">// On paths of an odd number, increase the path length</span><br> 
             &nbsp; &nbsp; &nbsp; &nbsp; if (pathsTraversed % 2 === 1) {<br>
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; pathLength += 1;<br>
             &nbsp; &nbsp; &nbsp; &nbsp; }<br>
-            &nbsp; &nbsp; &nbsp; &nbsp; // Change direction and reset steps remaining<br>
+            &nbsp; &nbsp; &nbsp; &nbsp; <span class="comment">// Change direction and reset steps remaining</span><br>
             &nbsp; &nbsp; &nbsp; &nbsp;  currentDirection = (currentDirection + 1) % 4;<br>
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; stepsRemaining = pathLength;<br>
             &nbsp; &nbsp; &nbsp; }<br>
             <br>
-            &nbsp; &nbsp; &nbsp; // Apply the prime style class<br>
+            &nbsp; &nbsp; &nbsp; <span class="comment">// Apply the prime style class</span><br>
             &nbsp; &nbsp; &nbsp; if (prime(i)) {<br>
             &nbsp; &nbsp; &nbsp; &nbsp; spanArray[currentIndex].classList.add("prime");<br>
             &nbsp; &nbsp; &nbsp; }<br>
             <br>
-            &nbsp; &nbsp; &nbsp; // Move print head one square in current direction<br>
+            &nbsp; &nbsp; &nbsp; <span class="comment">// Move print head one square in current direction</span><br>
             &nbsp; &nbsp; &nbsp; currentIndex += directions[currentDirection];<br>
             &nbsp; &nbsp; &nbsp; currentIndex += directions[currentDirection];<br>
             &nbsp; &nbsp; &nbsp; stepsRemaining -= 1;<br>
             &nbsp; &nbsp; }<br>
             <br>
-            &nbsp; &nbsp; // Append span array elements to a fragment, to send back to DOM in one go<br>
+            &nbsp; &nbsp; <span class="comment">// Append span array elements to a fragment, to send back to DOM in one go</span><br>
             &nbsp; &nbsp; let fragment = d.createDocumentFragment();<br>
             &nbsp; &nbsp; for (let i = 0; i < spanArray.length; i += 1) {<br>
             &nbsp; &nbsp; &nbsp; fragment.append(spanArray[i]);<br>
@@ -398,9 +398,31 @@
           })(document);
         </p>
       </div> 
-  
 
+      <h3>What next?</h3>
+      <h4>Optimisation, reusability, interactivity...</h4>
 
+      <p>If Javascript is doing the hard work for us, why stop at a 100 X 100 grid? Why not fill the whole page?  Remember how we set things up: before we ask for the grid to be rendered in the browser, we’re calling that prime function for each number up to 10,000. Recall that the prime function itself checks every possible factor of each number passed to it. That means that by the time we get to prime spans on the outermost paths of the spiral, Javascript is checking close to 50,000 possible factors before colouring each one in.</p>
+
+      <p>That’s a lot of calculations! And yet, for a 100 x 100 grid, they can still be done in a matter of milliseconds. But the relationship between the grid size and the total number of possible factors that must be checked across the grid is not linear, the latter increases at a much higher rate than the former. This bears out experimentally: A 150 x 150 takes a few seconds to fully render. I haven’t had the patience to hang around for long enough to see whether a 200 x 200 grid will ever get there. What to do?</p>
+
+      <p>One thing we could do is to separate the prime-computation operations from the spiral-rendering operations. Instead of calling the prime checker function from inside the for loop that applies the prime style class to spans, we could instead use the prime checker function to precompute a list of primes, and store those in a file that the span-styling for loop can access. That way, the rendering of the spiral isn’t reliant on the really computationally heavy bit (running through all possible factors).</p>
+
+      <p>There might also be some better maths we can do on the prime checker function to slash the number of possible factors we’re checking – I don’t have formal training in that sort of thing though, so it will take a bit of research before I can improve the function that way. I’m hoping the pre-computing approach will optimise the project sufficiently to get some bigger grids into the browser, so this is my next step.</p>
+
+      <p>Once I’ve managed that, I think it might be nice to be able to give viewers some control over the dimensions of the grid with via inputs or sliders that represent possible dimensions. Another aim is to get the spiral into one of the Javascript frameworks, and then on into component libraries. I mean, you never know when you might need to pop a quick Ulam spiral into that React todo list app you’re building.</p>
+
+      <p>So, the project is far from over! I’m not even faintly eyeing up any other famous mathsy spirals and thinking about having a go at building them any time soon… </p>
+
+      <img class="fib" src="../assets/fib-spiral.svg" alt="A very faint blue fibonacci spiral">
+
+      <h3>Thanks for reading!</h3>
+
+      <p>If you go this far, then you might be interested in what else I'm up to. Check out my <a href="https://ammersive.github.io/portfolio/" target="_blank" rel="noopener noreferrer">portfolio site</a> and my <a href="https://github.com/ammersive/" target="_blank" rel="noopener noreferrer">Github</a>. And do feel free to reach out on <a href="https://twitter.com/ammersive" target="_blank" rel="noopener noreferrer">Twitter</a> and <a href="https://www.linkedin.com/in/ammersive/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</p>
+
+      <p>Oh, and before you go, here's a cool transformed version of the Ulam spiral I'm using for the background of this page :)</p>
+
+      <img src="../assets/ulam-transformed1.jpg" alt="">
 
     </article>
     
