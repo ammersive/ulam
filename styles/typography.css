@@ -1,12 +1,10 @@
+
+
 body {
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   line-height: 1.4rem;
   color: rgb(34, 27, 22);
-}
-
-.page-header {
-
 }
 
 h1 {
@@ -16,16 +14,29 @@ h1 {
   text-align: center;
   padding: 1rem;
 }
+@media screen and (max-width: 700px) {
+  h1 {
+    font-size: 3rem;
+    line-height: 3.8rem;
+  }
+}
 
 h2 {
   font-size: 2rem;
   line-height: 3rem;
   margin: 5rem 0rem 1rem 0rem;
 }
+@media screen and (max-width: 700px) {
+  h2 {
+    font-size: 1.5rem;
+    line-height: 2.3rem;
+  }
+}
 
 h3 {
   font-family: 'Bodoni Moda', serif;
   font-size: 2rem;
+  line-height: 2.2rem;
   margin: 0.5rem 0rem 0.5rem 0rem;
 }
 
@@ -94,6 +105,12 @@ ul.contents li {
   font-size: 1.3rem; 
   line-height: 2rem;
 }  
+@media screen and (max-width: 700px) {
+  ul.contents li {
+    font-size: 1.1rem; 
+    line-height: 1.6rem;
+  } 
+}
 
 ol.list {
   list-style-type: decimal;
@@ -131,6 +148,13 @@ ul.answers {
   color: aquamarine;
   margin-left: 3rem;
 }
+@media screen and (max-width: 700px) {
+  .terminal .code {    
+    font-size: 0.7rem;
+    margin-left: 2rem;
+  } 
+}
+
 
 .terminal .comment {
   color: rgb(71, 161, 26);

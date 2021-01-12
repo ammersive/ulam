@@ -427,31 +427,30 @@
               &nbsp; &nbsp; if (stepsRemaining === 0) {<br>
               &nbsp; &nbsp; &nbsp; pathsTraversed += 1;<br>
               <br>
-              &nbsp; &nbsp; &nbsp; &nbsp; <span class="comment">// On paths of an odd number, increase the path length</span><br> 
-              &nbsp; &nbsp; &nbsp; &nbsp; if (pathsTraversed % 2 === 1) {<br>
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; pathLength += 1;<br>
-              &nbsp; &nbsp; &nbsp; &nbsp; }<br>
-              &nbsp; &nbsp; &nbsp; &nbsp; <span class="comment">// Change direction and reset steps remaining</span><br>
-              &nbsp; &nbsp; &nbsp; &nbsp;  currentDirection = (currentDirection + 1) % 4;<br>
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; stepsRemaining = pathLength;<br>
+              &nbsp; &nbsp; &nbsp; <span class="comment">// On paths of an odd number, increase the path length</span><br> 
+              &nbsp; &nbsp; &nbsp; if (pathsTraversed % 2 === 1) {<br>
+              &nbsp; &nbsp; &nbsp; &nbsp; pathLength += 1;<br>
               &nbsp; &nbsp; &nbsp; }<br>
-              <br>
-              &nbsp; &nbsp; &nbsp; <span class="comment">// Apply the prime style class</span><br>
-              &nbsp; &nbsp; &nbsp; if (prime(i)) {<br>
-              &nbsp; &nbsp; &nbsp; &nbsp; spanArray[currentIndex].classList.add("prime");<br>
-              &nbsp; &nbsp; &nbsp; }<br>
-              <br>
-              &nbsp; &nbsp; &nbsp; <span class="comment">// Move print head one square in current direction</span><br>
-              &nbsp; &nbsp; &nbsp; currentIndex += directions[currentDirection];<br>
-              &nbsp; &nbsp; &nbsp; currentIndex += directions[currentDirection];<br>
-              &nbsp; &nbsp; &nbsp; stepsRemaining -= 1;<br>
+              &nbsp; &nbsp; &nbsp; <span class="comment">// Change direction and reset steps remaining</span><br>
+              &nbsp; &nbsp; &nbsp; currentDirection = (currentDirection + 1) % 4;<br>
+              &nbsp; &nbsp; &nbsp; stepsRemaining = pathLength;<br>
               &nbsp; &nbsp; }<br>
               <br>
-              &nbsp; &nbsp; <span class="comment">// Append span array elements to a fragment, to send back to DOM in one go</span><br>
-              &nbsp; &nbsp; let fragment = d.createDocumentFragment();<br>
-              &nbsp; &nbsp; for (let i = 0; i < spanArray.length; i += 1) {<br>
-              &nbsp; &nbsp; &nbsp; fragment.append(spanArray[i]);<br>
-              &nbsp; &nbsp; }<br>  
+              &nbsp; &nbsp; <span class="comment">// Apply the prime style class</span><br>
+              &nbsp; &nbsp; if (prime(i)) {<br>
+              &nbsp; &nbsp; &nbsp; spanArray[currentIndex].classList.add("prime");<br>
+              &nbsp; &nbsp; }<br>
+              <br>
+              &nbsp; &nbsp; <span class="comment">// Move print head one square in current direction</span><br>
+              &nbsp; &nbsp; currentIndex += directions[currentDirection];<br>
+              &nbsp; &nbsp; stepsRemaining -= 1;<br>
+              &nbsp; }<br>
+              <br>
+              &nbsp; <span class="comment">// Append span array elements to a fragment, to send back to DOM in one go</span><br>
+              &nbsp; let fragment = d.createDocumentFragment();<br>
+              &nbsp; for (let i = 0; i < spanArray.length; i += 1) {<br>
+              &nbsp; &nbsp; fragment.append(spanArray[i]);<br>
+              &nbsp; }<br>  
               <br>
               &nbsp; mainGrid.append(fragment);<br>    
             <br>

@@ -15,3 +15,14 @@
 .main-grid .prime {
   background-color: rgb(4, 56, 57);
 }
+
+@media screen and (max-width: 700px) {
+  .main-grid {
+    width: 300px;
+    height: 300px;
+  }
+  .main-grid span {
+    height: 3px;
+    width: 3px;
+  }
+}
