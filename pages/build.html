@@ -10,6 +10,7 @@
   <script defer src="../traversal/traversal.js"></script>
   <script defer src="../spiral-nums/spiral-nums.js"></script>
   <script defer src="../paths/paths.js"></script>
+  <script defer src="../app.js"></script>
 
   <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&family=IBM+Plex+Mono&family=Poppins:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -25,7 +26,6 @@
 
       <header class="page-header">
           <h1>Building a Javascript Ulam spiral</h1>
-          <h2>Designing the spiraling algorithm and broader project motivations</h2>
           <p><a href="https://ammersive.github.io/ulam/">back</a></p>
       </header>
 
@@ -44,9 +44,9 @@
       <p>There are three stages to the project:</p>
       
       <ol class="list">
-        <li>Create a grid of squares, where we have control over the colour of the squares.</li> 
-        <li>Write a bit of code that can identify if a number is prime</li>
-        <li>Write a bit of code that specifies the spiralling movement across the grid</li>
+        <li>Create a <strong>grid of squares</strong>, where we have <strong>control over the colour</strong> of the squares.</li> 
+        <li>Write a bit of code that can <strong>identify if a number is prime</strong></li>
+        <li>Write a bit of code that specifies the <strong>spiralling movement across the grid</strong></li>
       </ol>
       
       <p>Let's get started!</p>
@@ -55,7 +55,7 @@
 
       <p>I’ve chosen to go with a 100 x 100 grid, which means we need to create 10,000 grid squares. We’ll be using the HTML equivalent of a square, an element called a <em>span</em>. We can then use the styling language CSS to tell these spans how big and what colour to be. So, from now on I’ll talk about “spans” – just think of them as squares that we can display on a webpage.</p> 
 
-      <p>We want each span to be pretty much identical except for whether or not they are coloured in. So, here’s our first job for Javascript, the programming language we’ll be using to get the main logic into the project. Let’s first declare some variables – words that will store the values of important data that we’ll want to reuse in the project. We said that the grid would be 100 spans wide/high, so we’ll store that value in a gridLength variable, which we can multiply by itself to get the total number of spans in the grid (gridSize), which will also be an important value to keep track of for later. Now let’s make lots of spans!</p>
+      <p>We want each span to be pretty much identical except for whether or not they are coloured in. So, here’s our first job for Javascript, the programming language we’ll be using to get the main logic into the project. Let’s first declare some variables – words that will store the values of important data that we’ll want to reuse in the project. We said that the grid would be 100 spans wide/high, so we’ll store that value in a <span class="inline-code">gridLength</span> variable, which we can multiply by itself to get the total number of spans in the grid (<span class="inline-code">gridSize</span>), which will also be an important value to keep track of for later. Now let’s make lots of spans!</p>
 
       <div class="terminal">
         <ol class="code">
@@ -69,7 +69,7 @@
         </ol>
       </div> 
 
-      <p>The main “making” action happens on line 4, the line that starts with the word “for”, up to line 7. We have here a fundamental computing procedure known as a loop (in this case, a “for loop”), which allows us perform some given operation over and over again, until some condition is met. The operation running inside this loop (lines 5 and 6) is just about interpretable in plain English – it basically says: create a span, and then put that span inside a thing we’re calling spanArray. An array is a way to store data. It’s a container where we can keep the spans together, and use them later. Line four is the bit that specifies how many spans we should make: start a count at 0, and then make a span, and every time we make a span, plus one to this count. Repeat this procedure over and over, stopping when the count count reaches the number stored in the variable gridSize, which is 10,000.</p>
+      <p>The main “making” action happens on line 4, the line that starts with the word “for”, up to line 7. We have here a fundamental computing procedure known as a loop (in this case, a “for loop”), which allows us perform some given operation over and over again, until some condition is met. The operation running inside this loop (lines 5 and 6) is just about interpretable in plain English – it basically says: create a span, and then put that span inside a thing we’re calling <span class="inline-code">spanArray</span>. An array is a way to store data. It’s a container where we can keep the spans together, and use them later. Line four is the bit that specifies how many spans we should make: start a count at 0, and then make a span, and every time we make a span, plus one to this count. Repeat this procedure over and over, stopping when the count count reaches the number stored in the variable <span class="inline-code">gridSize</span>, which is 10,000.</p>
 
       <p>We now have 10,000 spans, stored in a list and ready to go. That was quick! We still need to do a bit of styling to get things looking grid-like. For one thing, need to actually put them on our page, but we’ll do that right at the end when we’ve done the prime number bit. At present, these spans won’t have any dimensions, or colours, which they will need if we want to actually see them on our page. We can fix that with some CSS. Let’s first make a container to house our spans giving it a width and a height neatly divisible by 100, since we chose to have 100 spans per row/column.</p>
       
@@ -82,7 +82,7 @@
         </ol>
       </div> 
 
-      <p>Then we can tell each span element to be one-hundredth of the total grid height and length, they’ll fit nicely then. By default, the spans want to stack on top of each other, in a long line vertically down the page. “float: left” tells them to fill the first row, sitting next to each other until they reach the edge of the grid, and then fill the next row… and so on. We’ll also give them a nice minty colour so we can see them.</p> 
+      <p>Then we can tell each span element to be one-hundredth of the total grid height and length, they’ll fit nicely then. By default, the spans want to stack on top of each other, in a long line vertically down the page. <span class="inline-code">float: left</span> tells them to fill the first row, sitting next to each other until they reach the edge of the grid, and then fill the next row… and so on. We’ll also give them a nice minty colour so we can see them.</p> 
 
       <div class="terminal">
         <ol class="code">
@@ -96,7 +96,7 @@
         </ol>
       </div> 
 
-      <p>Even though we have made a grid here, for now it will look like a big minty square because the spans have no borders to differentiate them. We want it to be this way, since the thing we want to differentiate is the prime squares, which we’ll do later, but we can add a temporary border style to check things are as they should be with “border: solid 1 px blue;” for instance. This is also why we’ve set the box-sizing to border-box, so the addition of a test border won’t increase the size of the spans.</p>
+      <p>Even though we have made a grid here, for now it will look like a big minty square because the spans have no borders to differentiate them. We want it to be this way, since the thing we want to differentiate is the prime squares, which we’ll do later, but we can add a temporary border style to check things are as they should be with <span class="inline-code">border: solid 1 px blue;</span> for instance. This is also why we’ve set the box-sizing to border-box, so the addition of a test border won’t increase the size of the spans.</p>
 
       <p>Let’s get colouring in some primes!</p>
 
@@ -124,7 +124,7 @@
       
       <p>Here’s how it works in essence: By default, say that the number that we feed in (call this the “target” number) IS a prime. Give that answer back – unless that target number is found to be divisible by some other number – then confirm it’s not a prime. For loops are back - this time allowing us to check all the possible factors between 2 and half of the target number - because the lowest number that could be a factor that we are interested in is 2, and the highest one we need to check is half the target number – you can’t have a factor that’s bigger than half the target, so let’s not bother checking more than that.</p>
 
-      <p>After line 6 sets up this loop for us, line 7 does the mathsy bit. This line basically asks “if you divide the target number by the (possible) factor we’re currently checking, do you get a remainder of zero?”. Note that Javascript doesn’t read “%” as “percent”. In fact, it’s a modulo operator, and will give you the remainder from a division operation. We use it here because, if you can divide the target number by another (greater than 1) number and there’s no remainder, then the target number isn’t prime. If this is the case, we can move onto the next line, which is the line that ensures our function will now return the answer: “false”. However, if we loop through all the possible factors with line 6, and never find the condition on line 7 to be true, that means we’ve found a prime, and the function will return the answer “true”.</p>
+      <p>After line 6 sets up this loop for us, line 7 does the mathsy bit. This line basically asks “if you divide the target number by the (possible) factor we’re currently checking, do you get a remainder of zero?”. Note that Javascript doesn’t read <span class="inline-code">%</span> as “percent”. In fact, it’s a <span class="inline-code">modulo operator</span>, and will give you the remainder from a division operation. We use it here because, if you can divide the target number by another (greater than 1) number and there’s no remainder, then the target number isn’t prime. If this is the case, we can move onto the next line, which is the line that ensures our function will now return the answer: <span class="inline-code">false</span>. However, if we loop through all the possible factors with line 6, and never find the condition on line 7 to be true, that means we’ve found a prime, and the function will return the answer <span class="inline-code">true</span>.</p>
 
       <p>You use the prime function by “calling” it, anywhere else in the code below, and passing in the number you want to know about, like this:</p>
 
@@ -150,7 +150,7 @@
           </p>
       </div> 
       
-      <p>Unfortunately my computer doesn’t have enough memory to check the likes of such illustrious primes as 393050634124102232869567034555427371542904833 (yes that <a href="https://en.wikipedia.org/wiki/List_of_prime_numbers" target="_blank">really is</a> a prime) or 11111111111111111111111 (<a href="https://en.wikipedia.org/wiki/List_of_prime_numbers" target="_blank">same</a>) with my prime function, but if it did, in principle, my function should be able to give us an answer.</p>
+      <p>Unfortunately my computer doesn’t have enough memory to check the likes of such illustrious primes as <span class="inline-code">393050634124102232869567034555427371542904833</span> (yes that <a href="https://en.wikipedia.org/wiki/List_of_prime_numbers" target="_blank">really is</a> a prime) or <span class="inline-code">11111111111111111111111</span> (<a href="https://en.wikipedia.org/wiki/List_of_prime_numbers" target="_blank">same</a>) with my prime function, but if it did, in principle, my function should be able to give us an answer.</p>
 
       <p>With our prime function working, let’s work out how to make a spiral!</p>
 
@@ -158,16 +158,12 @@
 
       <p>A disclaimer before we dive into the spiralling algorithm: Because I am assuming that you, dear reader, are a human, and not the JavaScript engine, this part lends itself to a narrative that does not precisely follow the order of the code itself from top to bottom. For brevity, I won’t discuss explicitly how and when every variable is declared and initialised. I think it will be easier to understand why we’d want to store a particular value if we encounter it already at work in the ecosystem of the algorithm. So, if you’re interested in getting the full scoop on where variables are declared, and with what initial values, as well as the precise scope everything lies within, do check the code itself <a href="https://github.com/ammersive/ulam" target="_blank">here</a> as you read.</p>
 
-      <p>Recall that this is how we want the natural numbers to map to a spiral in our grid.</p>
-
-      <!-- <div id="spiGrid" class="spi-grid"></div> -->
-
       <p>Now, picture a print head that starts on a central span, that we’ll imagine represents the first of the natural numbers, as above, and which moves over the grid, checking spans in ascending order, and colouring those it finds to harbour primes. We’re not really going to program a print head, it’s just a useful metaphor for thinking about the problem. This metaphorical print head has three questions for us:</p>
 
       <ul class="questions">
-        <li>How do I check if the current span is prime, and colour it in if so?</li>
-        <li>How do I move to a neighbouring span?</li>
-        <li>How do I change direction when a corner of the spiral is reached?</li>
+        <li>How do I check if the <strong>current span is prime</strong>, and <strong>colour it in</strong> if so?</li>
+        <li>How do I <strong>move to a neighbouring span</strong>?</li>
+        <li>How do I <strong>change direction</strong> when a corner of the spiral is reached?</li>
       </ul>  
 
       <p>Let’s start answering those questions.</p>
@@ -201,10 +197,210 @@
           </p>
       </div> 
 
-      <p><em>...More to come...</em></p>
+      <p>We’ll want to use these directional values at similar points in the spiralling algorithm, so we’ll store them in an array for easy access when it comes to that. </p>
 
+      <h3>Colouring in the primes</h3>
+
+      <p>We want to check every span in the grid, colouring it in if it is prime. As we’re checking a series of things again (in this case, span elements that we pushed into an array) we can do this with a for loop, which we will tell to run as many times as there are spans in the grid – <span class="inline-code">gridSize</span> many times, in fact:</p>
+
+      <div class="terminal">
+        <p class="code">
+          for (let i = 1; i <= gridSize; i += 1) {
+        </p>
+      </div>  
+      
+      <p>Inside the for loop, for every span we come across, there’s a few things that we want to make sure we do.</p>
+
+      <p>Firstly, we need to check if that span is prime, and if we find that it is, colour it in. We’ve already written a function that will do this work for us, which we can now use inside our for loop. This is a practice known as “function composition”, where we take bits of code that perform a particular operation, and rather than adding additional functionality into to these, we call upon them inside another bit of code. It makes it a bit easier for us keep track of what we’re doing in our current spiralling algorithm if we’re not also trying to parse the prime function at the same time.  It pays off. The below if condition almost reads like English: “if i is prime…”</p>
+
+      <div class="terminal">
+        <p class="code">
+          if (prime(i)) {<br>
+          &nbsp; spanArray[currentIndex].classList.add("prime");<br>
+          }       
+        </p>
+      </div> 
+
+      <p>The body of the condition basically says: apply a style class (“prime”) to that span. We deal with the actual colouring elsewhere in our linked CSS style file (there, the “prime” class is basically to add a red colour). It’s not loads of styling, and we could have handled it here in the JavaScript file, but in general, it’s good to separate out styling concerns and the logic concerns, even if the code is only minimal. If anyone wanted to update the overall colour scheme of the page (…I’m not a designer, so no offense taken!) they don’t really want to have to pick through the JavaScript algorithms to do that. </p>
+
+      <p>Secondly, we need to move the print head over one span in the current direction of travel. We do this by assigning a new value to the <span class="inline-code">currentIndex</span>. <span class="inline-code">currentDirection</span> is a number that corresponds to one of the elements in our directions array. I’ll discuss how we set it in just a moment.</p>
+
+      <p>Thirdly, we minus one from the value of something called <span class="inline-code">stepsRemaining</span>.</p>
+
+      <div class="terminal">
+        <p class="code">
+          currentIndex += directions[currentDirection];<br>
+          stepsRemaining -= 1;
+        </p>
+      </div>  
+
+      <p><span class="inline-code">stepsRemaining</span> until what? Sounds pretty…ominous. It’s not. It’s all to do with how we spiral… </p>
+
+      <h3>Moving in a spiral</h3>
+
+      <p>To move in a spiral, the print head will set out in one direction, checking some number of spans before making a 90 degree turn anticlockwise. Then, it will check another series of spans, before turning again, and so on… To work out how to write a spiralling algorithm, we need to figure out the relationship between the natural numbers, and turns of the spiral. Let’s mark out the straight sides of the spiral with different colours – we’ll call these “paths”. Paths get longer as we spiral outwards. Can you see the <strong>pattern</strong> that holds between the sequence of <strong>natural numbers</strong> and the <strong>length of the paths</strong>? (Hint: the colours might help…)</p>
 
       <div id="pathsGrid" class="paths-grid"></div>
+
+      <p>Perhaps you spotted that the paths increase by one span on every other turn of the spiral. In other words, every other time the print head traverses one of these paths and turns 90 degrees anti-clockwise, the length of the next two paths increases by 1. That’s quite a straight forward relationship.</p>
+
+      <p>We now need a way to take note of the number of spans left to check on the current path before the print head needs to turn, and a way to keep note of the current path length. We’ll do the former with that (not so) ominous variable <span class="inline-code">stepsRemaining</span>, and the latter with another variable, <span class="inline-code">pathsTraversed</span>.</p>
+
+      <h4>When stepsRemaining is 0…</h4>
+
+      <p>A lot of the action happens when stepsRemaining is 0 – or, in other words, when the print head is at the end of a path, and at a corner of the spiral. At this point, we need to do a number of things. Firstly, we need to increase the number of paths traversed (important to keep track of so we can increase the path length every other time this happens). </p>
+
+      <div class="terminal">
+        <p class="code">
+          if (stepsRemaining === 0) {<br>
+          &nbsp; pathsTraversed += 1;      
+        </p>
+      </div> 
+
+      <p>Secondly, we need to check if this is indeed one of those times that the path length should increase. The below if condition checks if pathsTraversed is an odd number – which it will be every other time we traverse a path. If this is so, pathLength goes up by 1. Note: the <span class="inline-code">%</span> in the if condition is another modulo operator .</p>
+
+      <div class="terminal">
+        <p class="code">
+          if (pathsTraversed % 2 === 1) {<br>
+          &nbsp; pathLength += 1;<br>      
+        </p>
+      </div> 
+
+      <p>Finally, we need to change direction. We can do that by cycling through the directions array and reseting <span class="inline-code">currentDirection</span> to be the next element along in the array, as below. Another modulo! This one just lets us go back to the start of the array once we reach the end, which is exactly what we want for repeated spiralling turns.) At this point, we should also reset <span class="inline-code">stepsRemaining</span> so that it’s equal to the path length we incremented earlier, making it ready for the next run of the for loop and the next side of the spiral.</p>
+
+      <h4>When stepsRemaining isn't 0…</h4>
+
+      <p>What about if <span class="inline-code">stepsRemaining</span> isn’t 0 – either because we never entered the above if condition which checks for when it is – or because we’ve just finished going through that if condition, and <span class="inline-code">stepsRemaining</span> has been reset to the <span class="inline-code">pathLength</span>?</p>
+
+      <p>Well, if this is the case, then we’re all finished checking the prime-i-ness of the span; working out where we are along the current path, and when we want to turn, so the only thing left to do is to move on to the next span, so we can start over. We do this by updating the value of <span class="inline-code">currentIndex</span> so that it’s equal to one more step in whatever direction we are currently going.</p>
+
+      <div class="terminal">
+        <p class="code">
+          currentIndex += directions[currentDirection];<br> 
+          &nbsp; stepsRemaining -= 1;    
+        </p>
+      </div> 
+
+      <p>What next? Back for a few more goes through the for loop, probably, repeating all this lot over and over again, for as many times as there are spans in the grid itself, until all spans have been checked and either coloured in or passed over.</p>
+
+      <h3>Answering the print head’s questions</h3>
+
+      <p>We can now give the humble print head its answers:</p>
+
+      <ul class="questions">
+        <li>How do I check if the <strong>current span is prime</strong>, and <strong>colour it in</strong> if so?
+          <ul class="answers">
+            <li>Call the <strong>prime function</strong>, apply a <strong>class</strong>, and let <strong>CSS</strong> handle the styling.</li>
+          </ul>
+        </li>        
+        <li>How do I <strong>move to a neighbouring span</strong>?
+          <ul class="answers">
+            <li>Reassign the value of the <strong>index of the span you’re currently at</strong> using the values defined in the <strong>directions array</strong>.</li>
+          </ul>
+        </li>
+        <li>How do I <strong>change direction</strong> when a corner of the spiral is reached?
+          <ul class="answers">
+            <li><strong>Keep track of how many spans there are left to check on the current path</strong>, and when you get to the end, use the <strong>next value in the directions array</strong>. Oh, and if you are on an odd numbered path, <strong>add one more step to the next two paths</strong> you traverse so that the spiral can grow.</li>
+          </ul>
+        </li>  
+      </ul>
+
+      <p>And that’s it – that’s the Ulam spiral!</p>
+
+      <div id="mainGrid" class="main-grid"></div>
+
+      <h3>The whole shebang</h3>
+      
+      <p>The javascript code in full from the app.js file</p>
+
+      <div class="terminal">
+        <p class="code">
+          (d => {          
+            &nbsp; let prime = num => {<br>
+            &nbsp;&nbsp; let isPrime = true;<br> 
+            &nbsp;&nbsp; if (num <= 1) {<br>
+            &nbsp;&nbsp; &nbsp; isPrime = false;<br>
+            &nbsp;&nbsp; } else {<br> 
+            &nbsp;&nbsp; &nbsp; for (i = 2; i <= (num / 2); i += 1) {<br>
+            &nbsp;&nbsp; &nbsp; &nbsp; if (num % i === 0) {<br>
+            &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; isPrime = false;<br>
+            &nbsp;&nbsp; &nbsp; &nbsp; }<br>
+            &nbsp;&nbsp; &nbsp; }<br>   
+            &nbsp;&nbsp; }<br>    
+            &nbsp;&nbsp; return isPrime;<br>
+            &nbsp; }<br> 
+            <br>
+            &nbsp; // Build an array of span elements<br>
+            &nbsp; let gridLength = 100;<br>
+            &nbsp; let gridSize = gridLength * gridLength;<br>
+            &nbsp; let spanArray = [];<br> 
+            <br>
+            &nbsp; for (let i = 0; i < gridSize; i += 1) {<br>
+            &nbsp; &nbsp; span = d.createElement("span");<br>
+            &nbsp; &nbsp; spanArray.push(span);<br>    
+            &nbsp; }<br>
+            <br>
+            &nbsp; // The position of the print head, starting in the center<br>
+            &nbsp; let currentIndex = (gridSize / 2) + (gridLength / 2);<br>  
+            <br>
+            &nbsp; // Directions: differences in span indexes as the print head moves<br>
+            &nbsp; let up = -gridLength;<br>
+            &nbsp; let down = +gridLength;<br>
+            &nbsp; let right = 1;<br>
+            &nbsp; let left = -1;<br>
+            &nbsp; let directions = [up, left, down, right];<br>
+            <br>
+            &nbsp; // Current direction of travel of the print head<br>
+            &nbsp; let currentDirection = 0;<br>  
+            &nbsp; // Spans left to check before turning<br>
+            &nbsp; let stepsRemaining = 1;<br>
+            &nbsp; // A path is the total straight side of the spiral<br> 
+            &nbsp; before a turn is made<br>
+            &nbsp; let pathLength = 1;<br>
+            &nbsp; // This accounts for tight spiraling at the start of the loop (it should not increment until two directional turns)<br>
+            &nbsp; let pathsTraversed = -1;<br>
+            <br>
+            &nbsp; // Step through the natural numbers<br>
+            &nbsp; for (let i = 1; i <= gridSize; i += 1) {<br>
+            <br>
+            &nbsp; &nbsp; // If no steps remain, the print head is at the end of a path. Log that with pathsTraversed.<br>
+            &nbsp; &nbsp; if (stepsRemaining === 0) {<br>
+            &nbsp; &nbsp; &nbsp; pathsTraversed += 1;<br>
+            <br>
+            &nbsp; &nbsp; &nbsp; &nbsp; // On paths of an odd number, increase the path length<br> 
+            &nbsp; &nbsp; &nbsp; &nbsp; if (pathsTraversed % 2 === 1) {<br>
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; pathLength += 1;<br>
+            &nbsp; &nbsp; &nbsp; &nbsp; }<br>
+            &nbsp; &nbsp; &nbsp; &nbsp; // Change direction and reset steps remaining<br>
+            &nbsp; &nbsp; &nbsp; &nbsp;  currentDirection = (currentDirection + 1) % 4;<br>
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; stepsRemaining = pathLength;<br>
+            &nbsp; &nbsp; &nbsp; }<br>
+            <br>
+            &nbsp; &nbsp; &nbsp; // Apply the prime style class<br>
+            &nbsp; &nbsp; &nbsp; if (prime(i)) {<br>
+            &nbsp; &nbsp; &nbsp; &nbsp; spanArray[currentIndex].classList.add("prime");<br>
+            &nbsp; &nbsp; &nbsp; }<br>
+            <br>
+            &nbsp; &nbsp; &nbsp; // Move print head one square in current direction<br>
+            &nbsp; &nbsp; &nbsp; currentIndex += directions[currentDirection];<br>
+            &nbsp; &nbsp; &nbsp; currentIndex += directions[currentDirection];<br>
+            &nbsp; &nbsp; &nbsp; stepsRemaining -= 1;<br>
+            &nbsp; &nbsp; }<br>
+            <br>
+            &nbsp; &nbsp; // Append span array elements to a fragment, to send back to DOM in one go<br>
+            &nbsp; &nbsp; let fragment = d.createDocumentFragment();<br>
+            &nbsp; &nbsp; for (let i = 0; i < spanArray.length; i += 1) {<br>
+            &nbsp; &nbsp; &nbsp; fragment.append(spanArray[i]);<br>
+            &nbsp; &nbsp; }<br>  
+            <br>
+            &nbsp; mainGrid.append(fragment);<br>    
+          <br>
+          })(document);
+        </p>
+      </div> 
+  
+
+
 
     </article>
     

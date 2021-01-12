@@ -31,8 +31,38 @@ h3 {
   margin: 2rem 0rem 1rem 0rem;
 }
 
+h4 {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 1.4rem;
+  line-height: 2.5rem;
+  font-style: italic;
+  margin: 2rem 0rem 1rem 0rem;
+}
+
+figure {
+  margin-bottom: 1rem;
+}
+
+blockquote {
+  font-style: italic;
+  background: rgb(242, 235, 230);
+  padding: 0.3rem;
+}
+
+figcaption {
+  text-align: right;
+}
+
 p {
   margin-bottom: 1rem;
+}
+
+/* .bold {
+  font-weight: 700;
+} */
+
+li strong, p strong {
+  font-weight: 700;
 }
 
 ol.list {
@@ -44,7 +74,17 @@ ol.list {
 ul.questions {
   list-style: disc;
   margin-left: 3rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+ul.questions li {
+  margin-bottom: 0.5rem;
+}
+
+ul.answers {
+  list-style: circle;
+  margin-left: 2rem;
+  margin-top: 0.75rem;
 }
 
 .terminal {  
@@ -60,4 +100,13 @@ ul.questions {
   list-style-type: decimal;
   color: aquamarine;
   margin-left: 3rem;
+}
+
+.inline-code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  background-color: black;
+  color: aquamarine;
+  padding: 3px;
+  border-radius: 3px; 
 }
