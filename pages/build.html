@@ -4,20 +4,18 @@
   <meta charset="UTF-8"> 
   <meta http-equiv="x-ua-compatible" content="ie=edge">  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ulam Spiral</title>
-  <meta name="description" content="">  
-
-  <script defer src="../traversal/traversal.js"></script>
-  <script defer src="../spiral-nums/spiral-nums.js"></script>
-  <script defer src="../paths/paths.js"></script>
-  <script defer src="../app.js"></script>
+  <title>Building a Javascript Ulam spiral</title>
+  <meta name="description" content="Coding a Javascript Ulam spiral">
+  <meta name="keywords" content="JavaScript, primes, prime numbers, Ulam spiral">
+  <meta name="author" content="Sophie Stammers">
+  <script defer src="../scripts/spiral-nums.js"></script>
+  <script defer src="../scripts/traversal.js"></script>
+  <script defer src="../scripts/paths.js"></script>
+  <script defer src="../scripts/ulam.js"></script>
   <script src="https://kit.fontawesome.com/2e178b2af8.js" crossorigin="anonymous"></script> 
-
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&family=IBM+Plex+Mono&family=Poppins:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="../styles/main.css">
-
 </head>
 
 <body>
@@ -25,13 +23,14 @@
 
     <article class="article">
 
-      <header class="page-header" id="page-header">
+      <header class="page-header">
           <h1>Building a Javascript<br> Ulam spiral</h1>
           <p class="author">by <a href="https://ammersive.github.io/portfolio/" target="_blank" rel="noopener noreferrer">Sophie Stammers</a></p>
       </header>
 
       <h2>Contents</h2>
       <ul class="contents">
+        <li><a href="#intro">Truly, untameably wild?</a></li>
         <li><a href="#building">Building the grid</a></li>
         <li><a href="#prime-func">Prime checker function    </a></li>
         <li><a href="#layout">The layout of the spiral</a></li>
@@ -43,31 +42,39 @@
         <li><a href="#next">What next?</a></li>
       </ul>
 
-      <p>Prime numbers (those that are divisible by only themselves and one) are mathematically wild. Unlike, say, the even numbers, the primes famously elude the capture and discipline of a neat mathematical formula. Compare: For any given even number, we have a tidy formula from which we can tell where we’ll find the next even number, it’s just n + 2. Not so for the primes. Take your favourite prime number. Maybe it’s 3, or 17, or even 65537. There is currently no known generalisable mathematical statement from which we can derive how far up the sequence of natural (whole) numbers the next prime lies.</p> 
+      <div id="intro">
 
-      <p>So, are the primes scattered at random through the sequence of natural numbers? No! There’s some difficult maths we can do to reveal that order and predictability pervades at least some subsets of the primes, but there’s actually a much easier little conjuring trick we can perform to unveil a series of sequences and patters that dwell amongst the primes, which even that difficult maths itself cannot wholly explain – and – we can do it using just coloured pencils and graph paper!</p> 
+        <h3>Truly, untameably wild?</h3>
+        <a href="#prime-func"><i class="fas fa-chevron-down" aria-label="down"></i></a>
 
-      <p>In principle, at least. For whilst this conjuring trick is easy, it certainly is repetitive. Here’s the deal. Put your pencil in the middle of the graph paper and write a “1”. Go up one square and write “2”. Go left and write “3”. Keep going, inputting the next number to the next square, working in a tight spiral around 1 until you have something that looks like this:</p>  
+        <p>Prime numbers (those that are divisible by only themselves and one) are mathematically wild. Unlike, say, the even numbers, the primes famously elude the capture and discipline of a neat mathematical formula. Compare: For any given even number, we have a tidy formula from which we can tell where we’ll find the next even number, it’s just n + 2.</p> 
+          
+        <p>Not so for the primes. Take your favourite prime number. Maybe it’s 3, or 17, or even 65537. There is currently no known generalisable mathematical statement from which we can derive how far up the sequence of natural (whole) numbers the next prime lies.</p> 
 
-      <div id="spiGrid" class="spi-grid"></div>
+        <p>So, are the primes scattered at random through the sequence of natural numbers? No! There’s some difficult maths we can do to reveal that order and predictability pervades at least some subsets of the primes, but there’s actually a much easier little conjuring trick we can perform to unveil a series of sequences and patters that dwell amongst the primes, which even that difficult maths itself cannot wholly explain – and – we can do it using just coloured pencils and graph paper!</p> 
 
-      <p>Now, go around again, but this time, every time you find a prime number, colour in that square. If you have the patience to do this for all of the cells in, say, a 100 x 100 grid, you will witness the emergence of a haunting and beautiful pattern, in which many of the prime numbers – far more than would be expected by chance, and far more than for a number series that is truly, untameably wild –  line up in long diagonal stretches that criss-cross the page.</p> 
+        <p>In principle, at least. For whilst this conjuring trick is easy, it certainly is repetitive. Here’s the deal. Put your pencil in the middle of the graph paper and write a “1”. Go up one square and write “2”. Go left and write “3”. Keep going, inputting the next number to the next square, working in a tight spiral around 1 until you have something that looks like this:</p>  
 
-      <p>Alas, dear reader. I do not have this patience. But, I have always had a deep desire to generate for myself the mysterious Ulam spiral (first discovered by mathematician Stanisław Ulam in 1963, and popularized by Martin Gardner) in some way. The precise way became clear last year as I decided to retrain as a web developer: I could get my computer to do the colouring in bit for me.</p>
+        <div id="spiGrid" class="spi-grid"></div>
 
-      <p>There are three stages to the project:</p>
-      
-      <ol class="list">
-        <li>Create a <strong>grid of squares</strong>, where we have <strong>control over the colour</strong> of the squares.</li> 
-        <li>Write a bit of code that can <strong>identify if a number is prime</strong></li>
-        <li>Write a bit of code that specifies the <strong>spiralling movement across the grid</strong></li>
-      </ol>
-      
-      <p>Let's get started!</p>
+        <p>Now, go around again, but this time, every time you find a prime number, colour in that square. If you have the patience to do this for all of the cells in, say, a 100 x 100 grid, you will witness the emergence of a haunting and beautiful pattern, in which many of the prime numbers – far more than would be expected by chance, and far more than for a number series that is truly, untameably wild –  line up in long diagonal stretches that criss-cross the page.</p> 
 
+        <p>Alas, dear reader. I do not have this patience. But, I have always had a deep desire to generate for myself the mysterious Ulam spiral (first discovered by mathematician Stanisław Ulam in 1963, and popularized by Martin Gardner) in some way. The precise way became clear last year as I decided to retrain as a web developer: I could get my computer to do the colouring in bit for me.</p>
+
+        <p>There are three stages to the project:</p>
+        
+        <ol class="list">
+          <li>Create a <strong>grid of squares</strong>, where we have <strong>control over the colour</strong> of the squares.</li> 
+          <li>Write a bit of code that can <strong>identify if a number is prime</strong></li>
+          <li>Write a bit of code that specifies the <strong>spiralling movement across the grid</strong></li>
+        </ol>
+        
+        <p>Let's get started!</p>
+
+      </div>  
       <div id="building">
 
-        <a href="#page-header"><i class="fas fa-chevron-up" aria-label="up"></i></a>
+        <a href="#intro"><i class="fas fa-chevron-up" aria-label="up"></i></a>
         <h3>Building the grid</h3>
         <a href="#prime-func"><i class="fas fa-chevron-down" aria-label="down"></i></a>
 
@@ -87,31 +94,35 @@
           </ol>
         </div> 
 
-        <p>The main “making” action happens on line 4, the line that starts with the word “for”, up to line 7. We have here a fundamental computing procedure known as a loop (in this case, a “for loop”), which allows us perform some given operation over and over again, until some condition is met. The operation running inside this loop (lines 5 and 6) is just about interpretable in plain English – it basically says: create a span, and then put that span inside a thing we’re calling <span class="inline-code">spanArray</span>. An array is a way to store data. It’s a container where we can keep the spans together, and use them later. Line four is the bit that specifies how many spans we should make: start a count at 0, and then make a span, and every time we make a span, plus one to this count. Repeat this procedure over and over, stopping when the count count reaches the number stored in the variable <span class="inline-code">gridSize</span>, which is 10,000.</p>
+        <p>The main “making” action happens on line 4, the line that starts with the word “for”, up to line 7. We have here a fundamental computing procedure known as a loop (in this case, a “for loop”), which allows us perform some given operation over and over again, until some condition is met. The operation running inside this loop (lines 5 and 6) is just about interpretable in plain English – it basically says: create a span, and then put that span inside a thing we’re calling <span class="inline-code">spanArray</span>.</p>          
 
-        <p>We now have 10,000 spans, stored in a list and ready to go. That was quick! We still need to do a bit of styling to get things looking grid-like. For one thing, need to actually put them on our page, but we’ll do that right at the end when we’ve done the prime number bit. At present, these spans won’t have any dimensions, or colours, which they will need if we want to actually see them on our page. We can fix that with some CSS. Let’s first make a container to house our spans giving it a width and a height neatly divisible by 100, since we chose to have 100 spans per row/column.</p>
+        <p>An array is a way to store data. It’s a container where we can keep the spans together, and use them later. Line four is the bit that specifies how many spans we should make: start a count at 0, and then make a span, and every time we make a span, plus one to this count. Repeat this procedure over and over, stopping when the count count reaches the number stored in the variable <span class="inline-code">gridSize</span>, which is 10,000.</p>
+
+        <p>We now have 10,000 spans, stored in a list and ready to go. That was quick! We still need to do a bit of styling to get things looking grid-like. For one thing, need to actually put them on our page, but we’ll do that right at the end when we’ve done the prime number bit.</p>
+          
+        <p>At present, these spans won’t have any dimensions, or colours, which they will need if we want to actually see them on our page. We can fix that with some CSS. Let’s first make a container to house our spans giving it a width and a height neatly divisible by 100, since we chose to have 100 spans per row/column.</p>
         
         <div class="terminal">
-          <ol class="code">
-            <li>.main-grid {</li> 
-            <li>&nbsp; width: 600px;</li> 
-            <li>&nbsp; height: 600px;</li>
-            <li>}</li>         
-          </ol>
+          <p class="code">
+            .main-grid {<br> 
+            &nbsp; width: 600px;<br> 
+            &nbsp; height: 600px;<br>
+            }         
+            </p>
         </div> 
 
         <p>Then we can tell each span element to be one-hundredth of the total grid height and length, they’ll fit nicely then. By default, the spans want to stack on top of each other, in a long line vertically down the page. <span class="inline-code">float: left</span> tells them to fill the first row, sitting next to each other until they reach the edge of the grid, and then fill the next row… and so on. We’ll also give them a nice minty colour so we can see them.</p> 
 
         <div class="terminal">
-          <ol class="code">
-            <li>span {</li>
-            <li>&nbsp; height: 6px;</li>
-            <li>&nbsp; width: 6px;</li>  
-            <li>&nbsp; box-sizing: border-box;</li>
-            <li>&nbsp; float: left;</li>
-            <li>&nbsp; background-color: rgb(200, 249, 232);</li>  
-            <li>}</li>        
-          </ol>
+          <p class="code">
+            span {<br>
+            &nbsp; height: 6px;<br>
+            &nbsp; width: 6px;<br>  
+            &nbsp; box-sizing: border-box;<br>
+            &nbsp; float: left;<br>
+            &nbsp; background-color: rgb(200, 249, 232);<br>  
+            }        
+            </p>
         </div> 
 
         <p>Even though we have made a grid here, for now it will look like a big minty square because the spans have no borders to differentiate them. We want it to be this way, since the thing we want to differentiate is the prime squares, which we’ll do later, but we can add a temporary border style to check things are as they should be with <span class="inline-code">border: solid 1 px blue;</span> for instance. This is also why we’ve set the box-sizing to border-box, so the addition of a test border won’t increase the size of the spans.</p>
@@ -145,9 +156,15 @@
           </ol>
         </div>
         
-        <p>Here’s how it works in essence: By default, say that the number that we feed in (call this the “target” number) IS a prime. Give that answer back – unless that target number is found to be divisible by some other number – then confirm it’s not a prime. For loops are back - this time allowing us to check all the possible factors between 2 and half of the target number - because the lowest number that could be a factor that we are interested in is 2, and the highest one we need to check is half the target number – you can’t have a factor that’s bigger than half the target, so let’s not bother checking more than that.</p>
+        <p>Here’s how it works in essence: By default, say that the number that we feed in (call this the “target” number) IS a prime. Give that answer back – unless that target number is found to be divisible by some other number – then confirm it’s not a prime.</p> 
+          
+        <p>For loops are back - this time allowing us to check all the possible factors between 2 and half of the target number - because the lowest number that could be a factor that we are interested in is 2, and the highest one we need to check is half the target number – you can’t have a factor that’s bigger than half the target, so let’s not bother checking more than that.</p>
 
-        <p>After line 6 sets up this loop for us, line 7 does the mathsy bit. This line basically asks “if you divide the target number by the (possible) factor we’re currently checking, do you get a remainder of zero?”. Note that Javascript doesn’t read <span class="inline-code">%</span> as “percent”. In fact, it’s a <span class="inline-code">modulo operator</span>, and will give you the remainder from a division operation. We use it here because, if you can divide the target number by another (greater than 1) number and there’s no remainder, then the target number isn’t prime. If this is the case, we can move onto the next line, which is the line that ensures our function will now return the answer: <span class="inline-code">false</span>. However, if we loop through all the possible factors with line 6, and never find the condition on line 7 to be true, that means we’ve found a prime, and the function will return the answer <span class="inline-code">true</span>.</p>
+        <p>After line 6 sets up this loop for us, line 7 does the mathsy bit. This line basically asks “if you divide the target number by the (possible) factor we’re currently checking, do you get a remainder of zero?”.</p> 
+          
+        <p>Note that Javascript doesn’t read <span class="inline-code">%</span> as “percent”. In fact, it’s a <span class="inline-code">modulo operator</span>, and will give you the remainder from a division operation. We use it here because, if you can divide the target number by another (greater than 1) number and there’s no remainder, then the target number isn’t prime.</p> 
+          
+        <p>If this is the case, we can move onto the next line, which is the line that ensures our function will now return the answer: <span class="inline-code">false</span>. However, if we loop through all the possible factors with line 6, and never find the condition on line 7 to be true, that means we’ve found a prime, and the function will return the answer <span class="inline-code">true</span>.</p>
 
         <p>You use the prime function by “calling” it, anywhere else in the code below, and passing in the number you want to know about, like this:</p>
 
@@ -184,7 +201,9 @@
         <h3>The layout of the spiral</h3>
         <a href="#moving"><i class="fas fa-chevron-down" aria-label="down"></i></a>
 
-        <p>A disclaimer before we dive into the spiralling algorithm: Because I am assuming that you, dear reader, are a human, and not the JavaScript engine, this part lends itself to a narrative that does not precisely follow the order of the code itself from top to bottom. For brevity, I won’t discuss explicitly how and when every variable is declared and initialised. I think it will be easier to understand why we’d want to store a particular value if we encounter it already at work in the ecosystem of the algorithm. So, if you’re interested in getting the full scoop on where variables are declared, and with what initial values, as well as the precise scope everything lies within, do check the code itself <a href="https://github.com/ammersive/ulam" target="_blank">here</a> as you read.</p>
+        <p>A disclaimer before we dive into the spiralling algorithm: Because I am assuming that you, dear reader, are a human, and not the JavaScript engine, this part lends itself to a narrative that does not precisely follow the order of the code itself from top to bottom. For brevity, I won’t discuss explicitly how and when every variable is declared and initialised. I think it will be easier to understand why we’d want to store a particular value if we encounter it already at work in the ecosystem of the algorithm.</p> 
+          
+        <p>So, if you’re interested in getting the full scoop on where variables are declared, and with what initial values, as well as the precise scope everything lies within, do have a look at the <span class="inline-code">scripts/ulam.js</span> file itself in the <a href="https://github.com/ammersive/ulam" target="_blank">code repository</a> or <a href="#shebang" target="_blank">here</a> as you read.</p>
 
         <p>Now, picture a print head that starts on a central span, that we’ll imagine represents the first of the natural numbers, as above, and which moves over the grid, checking spans in ascending order, and colouring those it finds to harbour primes. We’re not really going to program a print head, it’s just a useful metaphor for thinking about the problem. This metaphorical print head has three questions for us:</p>
 
@@ -272,7 +291,9 @@
           </p>
         </div>  
 
-        <p><span class="inline-code">stepsRemaining</span> until what? Sounds pretty…ominous. It’s not. It’s all to do with how we spiral… </p>
+        <p><span class="inline-code">stepsRemaining</span> until what? Sounds pretty…ominous.</p> 
+
+        <p>But it’s not. It’s all to do with how we spiral… </p>
 
       </div>
       <div id="spiral">
@@ -281,7 +302,9 @@
         <h3 >Moving in a spiral</h3>
         <a href="#answers"><i class="fas fa-chevron-down" aria-label="down"></i></a>
 
-        <p>To move in a spiral, the print head will set out in one direction, checking some number of spans before making a 90 degree turn anticlockwise. Then, it will check another series of spans, before turning again, and so on… To work out how to write a spiralling algorithm, we need to figure out the relationship between the natural numbers, and turns of the spiral. Let’s mark out the straight sides of the spiral with different colours – we’ll call these “paths”. Paths get longer as we spiral outwards. Can you see the <strong>pattern</strong> that holds between the sequence of <strong>natural numbers</strong> and the <strong>length of the paths</strong>? (Hint: the colours might help…)</p>
+        <p>To move in a spiral, the print head will set out in one direction, checking some number of spans before making a 90 degree turn anticlockwise. Then, it will check another series of spans, before turning again, and so on…</p> 
+          
+        <p>To work out how to write a spiralling algorithm, we need to figure out the relationship between the natural numbers, and turns of the spiral. Let’s mark out the straight sides of the spiral with different colours – we’ll call these “paths”. Paths get longer as we spiral outwards. Can you see the <strong>pattern</strong> that holds between the sequence of <strong>natural numbers</strong> and the <strong>length of the paths</strong>? (Hint: the colours might help…)</p>
 
         <div id="pathsGrid" class="paths-grid"></div>
 
@@ -291,7 +314,7 @@
 
         <h4>When stepsRemaining is 0…</h4>
 
-        <p>A lot of the action happens when stepsRemaining is 0 – or, in other words, when the print head is at the end of a path, and at a corner of the spiral. At this point, we need to do a number of things. Firstly, we need to increase the number of paths traversed (important to keep track of so we can increase the path length every other time this happens). </p>
+        <p>A lot of the action happens when <span class="inline-code">stepsRemaining</span> is 0 – or, in other words, when the print head is at the end of a path, and at a corner of the spiral. At this point, we need to do a number of things. Firstly, we need to increase the number of paths traversed (important to keep track of so we can increase the path length every other time this happens). </p>
 
         <div class="terminal">
           <p class="code">
@@ -364,7 +387,7 @@
         <h3>The whole shebang</h3>
         <a href="#next"><i class="fas fa-chevron-down" aria-label="down"></i></a>
         
-        <p>The javascript code in full from the app.js file</p>
+        <p>The javascript code in full from the <span class="inline-code">scripts/ulam.js file</span>:</p>
 
         <div class="terminal">
           <p class="code">
@@ -459,15 +482,17 @@
         <h4>Optimisation, reusability, interactivity...</h4>
         <a href="#thanks"><i class="fas fa-chevron-down" aria-label="down"></i></a>
 
-        <p>If Javascript is doing the hard work for us, why stop at a 100 X 100 grid? Why not fill the whole page?  Remember how we set things up: before we ask for the grid to be rendered in the browser, we’re calling that prime function for each number up to 10,000. Recall that the prime function itself checks every possible factor of each number passed to it. That means that by the time we get to prime spans on the outermost paths of the spiral, Javascript is checking close to 50,000 possible factors before colouring each one in.</p>
+        <p>If Javascript is doing the hard work for us, why stop at a 100 X 100 grid? Why not fill the whole page?</p>   
+        
+        <p>Here's how we set things up: before we ask for the grid to be rendered in the browser, we’re calling that prime function for each number up to 10,000. Remember that the prime function itself checks every possible factor of each number passed to it. That means that by the time we get to prime spans on the outermost paths of the spiral, Javascript is checking close to 50,000 possible factors before colouring each one in.</p>
 
-        <p>That’s a lot of calculations! And yet, for a 100 x 100 grid, they can still be done in a matter of milliseconds. But the relationship between the grid size and the total number of possible factors that must be checked across the grid is not linear, the latter increases at a much higher rate than the former. This bears out experimentally: A 150 x 150 takes a few seconds to fully render. I haven’t had the patience to hang around for long enough to see whether a 200 x 200 grid will ever get there. What to do?</p>
+        <p>That’s a lot of calculations! And yet, for a 100 x 100 grid, they can still be done in a fraction of a second. But the relationship between the grid size and the total number of possible factors that must be checked across the grid is not linear, the latter increases at a much higher rate than the former. This bears out experimentally: A 150 x 150 grid using my current methodology takes a few seconds to fully render. I haven’t had the patience to hang around for long enough to see whether a 200 x 200 grid will ever get there. What to do?</p>
 
         <p>One thing we could do is to separate the prime-computation operations from the spiral-rendering operations. Instead of calling the prime checker function from inside the for loop that applies the prime style class to spans, we could instead use the prime checker function to precompute a list of primes, and store those in a file that the span-styling for loop can access. That way, the rendering of the spiral isn’t reliant on the really computationally heavy bit (running through all possible factors).</p>
 
         <p>There might also be some better maths we can do on the prime checker function to slash the number of possible factors we’re checking – I don’t have formal training in that sort of thing though, so it will take a bit of research before I can improve the function that way. I’m hoping the pre-computing approach will optimise the project sufficiently to get some bigger grids into the browser, so this is my next step.</p>
 
-        <p>Once I’ve managed that, I think it might be nice to be able to give viewers some control over the dimensions of the grid with via inputs or sliders that represent possible dimensions. Another aim is to get the spiral into one of the Javascript frameworks, and then on into component libraries. I mean, you never know when you might need to pop a quick Ulam spiral into that React todo list app you’re building.</p>
+        <p>Once I’ve managed that, I think it might be nice to be able to give viewers some control over the dimensions of the grid via inputs or sliders that represent possible dimensions. Another aim is to get the spiral into one of the Javascript frameworks, and maybe into some component libraries. I mean, you <em class="italic">never know</em> when you might need to pop a quick Ulam spiral into that React todo list app you’re building.</p>
 
         <p>So, the project is far from over! I’m not even faintly eyeing up any other famous mathsy spirals and thinking about having a go at building them any time soon… </p>
 
@@ -479,9 +504,9 @@
         <a href="#next"><i class="fas fa-chevron-up" aria-label="up"></i></a> 
         <h3>Thanks for reading!</h3>
 
-        <p>If you go this far, then you might be interested in what else I'm up to. Check out my <a href="https://ammersive.github.io/portfolio/" target="_blank" rel="noopener noreferrer">portfolio site</a> and my <a href="https://github.com/ammersive/" target="_blank" rel="noopener noreferrer">Github</a>. And do feel free to reach out on <a href="https://twitter.com/ammersive" target="_blank" rel="noopener noreferrer">Twitter</a> and <a href="https://www.linkedin.com/in/ammersive/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</p>
+        <p>If you got this far, then you might be interested in what else I'm up to. Check out my <a href="https://ammersive.github.io/portfolio/" target="_blank" rel="noopener noreferrer">portfolio site</a> and my <a href="https://github.com/ammersive/" target="_blank" rel="noopener noreferrer">Github</a>. And do feel free to reach out on <a href="https://twitter.com/ammersive" target="_blank" rel="noopener noreferrer">Twitter</a> and <a href="https://www.linkedin.com/in/ammersive/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</p>
 
-        <p>Oh, and before you go, here's a cool transformed version of the Ulam spiral I'm using for the background of this page :)</p>
+        <p>Oh, and before you go, here's a cool transformed version of the Ulam spiral I'm using for the background of this page to really show up all those hidden patterns :)</p>
 
         <img class="transformed" src="../assets/ulam-transformed1.jpg" alt="">
       
