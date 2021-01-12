@@ -20,15 +20,26 @@ h1 {
 h2 {
   font-size: 2rem;
   line-height: 3rem;
-  text-align: center;
-  padding: 1rem;
+  margin: 5rem 0rem 1rem 0rem;
 }
 
 h3 {
   font-family: 'Bodoni Moda', serif;
   font-size: 2rem;
-  line-height: 3rem;
-  margin: 2rem 0rem 1rem 0rem;
+  margin: 0.5rem 0rem 0.5rem 0rem;
+}
+
+i {
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.fa-chevron-up {
+  margin-top: 3rem;
+}
+.fa-chevron-down {
+  margin-bottom: 1.5rem;
 }
 
 h4 {
@@ -72,6 +83,17 @@ p {
 li strong, p strong {
   font-weight: 700;
 }
+
+ul.contents {
+  list-style: none;
+  margin-bottom: 2.5rem;  
+}
+
+ul.contents li {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 1.3rem; 
+  line-height: 2rem;
+}  
 
 ol.list {
   list-style-type: decimal;
