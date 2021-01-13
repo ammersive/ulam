@@ -42,6 +42,7 @@ figcaption {
 }
 
 h2 {
+  font-family: 'Bodoni Moda', serif;
   font-size: 2rem;
   line-height: 3rem;
   margin: 5rem 0rem 1rem 0rem;
@@ -74,6 +75,11 @@ i {
   margin-bottom: 1.5rem;
 }
 
+.formula {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+}
+
 h4 {
   font-family: 'Bodoni Moda', serif;
   font-size: 1.4rem;
@@ -88,6 +94,14 @@ p {
 
 li strong, p strong {
   font-weight: 700;
+}
+
+.demo {
+  display: inline-block;
+  height: 0.8rem;
+  width: 0.8rem;
+  background-color: aquamarine;
+  border: solid 1px rgb(71, 189, 150);
 }
 
 ul.contents {
@@ -167,6 +181,16 @@ ul.answers {
 
 .italic {
   font-style: italic;
+}
+
+.sophie {
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+.back {
+  font-size: 0.8rem;
+  text-align: center;
 }
 
 a {
