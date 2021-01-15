@@ -16,22 +16,22 @@
 
   <meta name="keywords" content="JavaScript, primes, prime numbers, Ulam spiral">
   <meta name="author" content="Sophie Stammers">
-  <title>Building a Javascript Ulam spiral</title>
+  <title>Building a JavaScript Ulam spiral</title>
 
-  <!-- Basic -->
-  <meta property="og:title" content="Building a Javascript Ulam spiral">
-  <meta property="og:description" content="An Ulam spiral is a way to demonstrate, visually, that there are sequences in the number system with high densities of primes. You can build one with 50 lines of JavaScript. Here's how, and why.">
-  <meta property="og:url" content="https://ammersive.github.io/ulam/pages/build.html/">
-  <meta property="og:image" content="https://ammersive.github.io/ulam/assets/ulam-transformed-sm.jpg"/>
-
-  <!-- Additional -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Ammersive">
-
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@ammersive">
-  <meta name="twitter:creator" content="@ammersive">  
+  <!-- OG markup -->
+  <meta prefix="og: http://ogp.me/ns#" property="og:type" content="website" />
+  <meta prefix="og: http://ogp.me/ns#" property="og:title" content="Building a JavaScript
+  Ulam spiral" />
+  <meta prefix="og: http://ogp.me/ns#" property="og:description" content="An Ulam spiral is a way to demonstrate, visually, that there are sequences in the number system with high densities of primes. You can build one with 50 lines of JavaScript. Here's how, and why." />
+  <meta prefix="og: http://ogp.me/ns#" property="og:image" content="https://ammersive.github.io/ulam/assets/ulam-transformed-sm.jpg" />
+  <meta prefix="og: http://ogp.me/ns#" property="og:url" content="https://ammersive.github.io/ulam/pages/build.html" /> 
+  
+  <!-- Twitter card mark-up -->
+  <meta name="twitter:card" content="https://ammersive.github.io/ulam/assets/ulam-transformed-sm.jpg" />
+  <meta name="twitter:site" content="@ammersive" />
+  <meta name="twitter:domain" content="https://ammersive.github.io/ulam/pages/build.html" />
+  <meta name="twitter:title" content="JavaScript Ulam spiral" />
+  <meta name="twitter:description" content="An Ulam spiral is a way to demonstrate, visually, that there are sequences in the number system with high densities of primes. You can build one with 50 lines of JavaScript. Here's how, and why." />  
   
   <!-- Grid logic -->
   <script defer src="../scripts/spiral-nums.js"></script>
@@ -52,7 +52,7 @@
     <article class="article">
 
       <header class="page-header">
-          <h1>Building a Javascript<br> Ulam spiral</h1>
+          <h1>Building a JavaScript<br> Ulam spiral</h1>
           <p class="author">by <a href="https://ammersive.github.io/portfolio/" target="_blank" rel="noopener noreferrer">Sophie Stammers</a></p>
       </header>
 
@@ -101,7 +101,7 @@
           <li>Write a bit of code that specifies the <strong>spiralling movement across the grid</strong>.</li>
         </ol>
 
-        <p>We're going to take a pretty rigorous walk through the code over the next few sections. But because I am assuming that you, dear reader, are a human, and not the JavaScript engine, we'll be doing this in stages, following a narrative that does not precisely match the order of the code itself from top to bottom. So if you want to take a look at the complete code repository, you can find that <a href="https://github.com/ammersive/ulam" target="_blank">here</a>. For the main Javascript algorithms, have a look at the <span class="inline-code">scripts/ulam.js</span> file in the <a href="https://github.com/ammersive/ulam" target="_blank">code repository</a>. There's also this <a href="#shebang" target="_blank">this reproduction</a> of those algorithms.</p>
+        <p>We're going to take a pretty rigorous walk through the code over the next few sections. But because I am assuming that you, dear reader, are a human, and not the JavaScript engine, we'll be doing this in stages, following a narrative that does not precisely match the order of the code itself from top to bottom. So if you want to take a look at the complete code repository, you can find that <a href="https://github.com/ammersive/ulam" target="_blank">here</a>. For the main JavaScript algorithms, have a look at the <span class="inline-code">scripts/ulam.js</span> file in the <a href="https://github.com/ammersive/ulam" target="_blank">code repository</a>. There's also this <a href="#shebang" target="_blank">this reproduction</a> of those algorithms.</p>
         
         <p>Let's get started!</p>
 
@@ -118,7 +118,7 @@
           
         <p>We can then use the styling language CSS to tell these spans how big and what colour to be. So, from now on I’ll talk about “spans” – just think of them as squares that we can display on a webpage.</p> 
 
-        <p>We want each span to be pretty much identical except for whether or not they are coloured in. So, here’s our first job for Javascript, the programming language we’ll be using to get the main logic into the project. Let’s first declare some variables – words that will store the values of important data that we’ll want to reuse in the project. We said that the grid would be 100 spans wide/high, so we’ll store that value in a <span class="inline-code">gridLength</span> variable, which we can multiply by itself to get the total number of spans in the grid (<span class="inline-code">gridSize</span>), which will also be an important value to keep track of for later. Let's head on over to the main Javascript file (which is <span class="inline-code">scripts/ulam.js</span> in the code repo linked above) and make lots of spans!</p>
+        <p>We want each span to be pretty much identical except for whether or not they are coloured in. So, here’s our first job for JavaScript, the programming language we’ll be using to get the main logic into the project. Let’s first declare some variables – words that will store the values of important data that we’ll want to reuse in the project. We said that the grid would be 100 spans wide/high, so we’ll store that value in a <span class="inline-code">gridLength</span> variable, which we can multiply by itself to get the total number of spans in the grid (<span class="inline-code">gridSize</span>), which will also be an important value to keep track of for later. Let's head on over to the main JavaScript file (which is <span class="inline-code">scripts/ulam.js</span> in the code repo linked above) and make lots of spans!</p>
 
         <div class="terminal">
           <ol class="code">
@@ -162,7 +162,7 @@
           </p>
         </div> 
 
-        <p>We still won't see anything just yet. That's because we haven't yet sent the spans we made in the Javascript file onto the HTML page. We'll do that once we've worked out which spans need to be prime.</p>
+        <p>We still won't see anything just yet. That's because we haven't yet sent the spans we made in the JavaScript file onto the HTML page. We'll do that once we've worked out which spans need to be prime.</p>
 
         <p>The final bit of CSS set up is to define the additional class that will allow our prime spans to show up in the grid. All we need to do is give them a different background colour. Let's use a dark green:</p>
 
@@ -183,7 +183,7 @@
         <h3>Prime checker function</h3>
         <a href="#questions"><i class="fas fa-chevron-down" aria-label="down"></i></a>
 
-        <p>Before we tell Javascript to get out its colouring pencils and go to town on our grid, we need a way to work out, for any given number: is that number prime? I’m going to do this with a function, a reusable bit of code that allows us ask that same question, but feed in any number of different values (which is useful, because there are quite a lot of numbers out there…). Here it is:</p>
+        <p>Before we tell JavaScript to get out its colouring pencils and go to town on our grid, we need a way to work out, for any given number: is that number prime? I’m going to do this with a function, a reusable bit of code that allows us ask that same question, but feed in any number of different values (which is useful, because there are quite a lot of numbers out there…). Here it is:</p>
 
         <div class="terminal">
           <ol class="code">
@@ -209,7 +209,7 @@
 
         <p>After line 6 sets up this loop for us, line 7 does the mathsy bit. This line basically asks “if you divide the target number by the (possible) factor we’re currently checking, do you get a remainder of zero?”.</p> 
           
-        <p>Note that Javascript doesn’t read <span class="inline-code">%</span> as “percent”. In fact, it’s a <span class="inline-code">modulus operator</span>, and will give you the remainder from a division operation. We use it here because, if you can divide the target number by another (greater than 1) number and there’s no remainder, then the target number isn’t prime.</p> 
+        <p>Note that JavaScript doesn’t read <span class="inline-code">%</span> as “percent”. In fact, it’s a <span class="inline-code">modulus operator</span>, and will give you the remainder from a division operation. We use it here because, if you can divide the target number by another (greater than 1) number and there’s no remainder, then the target number isn’t prime.</p> 
           
         <p>If this is the case, we can move onto the next line, which is the line that ensures our function will now return the answer: <span class="inline-code">false</span>. However, if we loop through all the possible factors with line 6, and never find the condition on line 7 to be true, that means we’ve found a prime, and the function will return the answer <span class="inline-code">true</span>.</p>
 
@@ -271,13 +271,13 @@
           <p class="code">let currentIndex = (gridSize / 2) + (gridLength / 2);</p>
         </div> 
 
-        <p>That’s basically Javascript for “go half way down, and half way across, and call that position the current index”. Then, to effectively “move” one cell to the right, we plus 1 to the current index. To move one left, we minus 1. Vertical movement is just like skipping a whole line - to move one down, we skip forward by as many cells as the grid is wide, and to move up, we skip backwards by that same number.</p>
+        <p>That’s basically JavaScript for “go half way down, and half way across, and call that position the current index”. Then, to effectively “move” one cell to the right, we plus 1 to the current index. To move one left, we minus 1. Vertical movement is just like skipping a whole line - to move one down, we skip forward by as many cells as the grid is wide, and to move up, we skip backwards by that same number.</p>
 
         <p>You can see this with the 10 x 10 grid below. The print head moves around the indexes of the spans, which I’ve written into the below grid. If it’s currently at the span with an index of 55, then it can move one square to the right by moving to the span with an index of 55 + 1. Move left with 55 - 1. To move one square up from 55, we minus the total grid length (which in this case is 10) thus moving onto the span with the index of 45. Move down with 55 + the total grid length, thus moving to 65.</p>
 
         <div id="traGrid" class="tra-grid"></div>
 
-        <p>You might notice that the first span has an index of 0. We also started at 0 in our first for loop. Why? Computers generally count things starting at 0, it means common mathematical operations <a href="https://www.johndcook.com/blog/2008/06/26/why-computer-scientists-count-from-zero/" target="_blank">use less memory</a>, which was important in the early days of computing when memory was scarce. These days, for the sort of computing I’ve been doing, at least, there’s more than enough memory to go around to start counting at 1, but optimisation considerations are still important for larger or more numerous sets of operations, and so the 0 indexing tradition has continued, at least in the C based programming languages – the family of languages to which Javascript belongs.</p>
+        <p>You might notice that the first span has an index of 0. We also started at 0 in our first for loop. Why? Computers generally count things starting at 0, it means common mathematical operations <a href="https://www.johndcook.com/blog/2008/06/26/why-computer-scientists-count-from-zero/" target="_blank">use less memory</a>, which was important in the early days of computing when memory was scarce. These days, for the sort of computing I’ve been doing, at least, there’s more than enough memory to go around to start counting at 1, but optimisation considerations are still important for larger or more numerous sets of operations, and so the 0 indexing tradition has continued, at least in the C based programming languages – the family of languages to which JavaScript belongs.</p>
 
         <p>Back to the grid. We can move around the grid by making modifications to the current index with:</p>
 
@@ -403,7 +403,7 @@
 
         <h4>Sending it all into the DOM</h4>
 
-        <p>There's one final piece to the puzzle, and that's rendering the spiral on the webpage. Our work in the Javascript file has been to essentially work through the <span class="inline-code">spanArray</span> (the list of spans), applying a style class to spans that represent primes in the spiral layout. It feels more complex than that because we haven't been working through the spans in the order in which they appear in the list, but in the order that a spiralling print head would traverse over them were they to be layed out in a grid already.</p> 
+        <p>There's one final piece to the puzzle, and that's rendering the spiral on the webpage. Our work in the JavaScript file has been to essentially work through the <span class="inline-code">spanArray</span> (the list of spans), applying a style class to spans that represent primes in the spiral layout. It feels more complex than that because we haven't been working through the spans in the order in which they appear in the list, but in the order that a spiralling print head would traverse over them were they to be layed out in a grid already.</p> 
           
         <p>But now that this list is appropriately styled, we can render it in the standard order, from lowest to highest index. This means we can use a straight-forward for loop to append the spans to the mainGrid container (this is the container we styled in CSS with our required dimensions and colours earlier).</p>
 
@@ -460,7 +460,7 @@
         <h3>The whole shebang</h3>
         <a href="#next"><i class="fas fa-chevron-down" aria-label="down"></i></a>
         
-        <p>Here's the javascript code in full from the <span class="inline-code">scripts/ulam.js</span> file:</p>
+        <p>Here's the JavaScript code in full from the <span class="inline-code">scripts/ulam.js</span> file:</p>
 
         <div class="terminal">
           <p class="code">
@@ -555,9 +555,9 @@
         <h4>Optimisation, reusability, interactivity...</h4>
         <a href="#thanks"><i class="fas fa-chevron-down" aria-label="down"></i></a>
 
-        <p>If Javascript is doing the hard work for us, why stop at a 100 X 100 grid? Why not fill the whole page?</p>   
+        <p>If JavaScript is doing the hard work for us, why stop at a 100 X 100 grid? Why not fill the whole page?</p>   
         
-        <p>Here's how we set things up: before we ask for the grid to be rendered in the browser, we’re calling that prime function for each number up to 10,000. Remember that the prime function itself checks every possible factor of each number passed to it. That means that by the time we get to prime spans on the outermost paths of the spiral, Javascript is checking close to 50,000 possible factors before colouring each one in.</p>
+        <p>Here's how we set things up: before we ask for the grid to be rendered in the browser, we’re calling that prime function for each number up to 10,000. Remember that the prime function itself checks every possible factor of each number passed to it. That means that by the time we get to prime spans on the outermost paths of the spiral, JavaScript is checking close to 50,000 possible factors before colouring each one in.</p>
 
         <p>That’s a lot of calculations! And yet, for a 100 x 100 grid, the whole thing can still be done in a fraction of a second. But the relationship between the grid size and the total number of possible factors that must be checked across the grid is not linear, the latter increases at a much higher rate than the former. This bears out experimentally: A 150 x 150 grid using my current methodology takes a few seconds to fully render. I haven’t had the patience to hang around for long enough to see whether a 200 x 200 grid will ever get there. What to do?</p>
 
@@ -565,7 +565,7 @@
 
         <p>I expect there's some optimisation we can do on the prime checker function to slash the number of possible factors we’re checking – I don’t have formal training in that sort of thing, so it will take a bit of research before I can improve the function that way, but I've got some ideas. I’m hoping the pre-computing approach will optimise the project sufficiently to get some bigger grids into the browser, so this is my next step.</p>
 
-        <p>Once I’ve managed that, I think it might be nice to be able to give viewers some control over the dimensions of the grid via inputs or sliders that represent possible dimensions. Another aim is to get the spiral into one of the Javascript frameworks, and maybe into some component libraries. I mean, you <em class="italic">just never know</em> when you might need to pop a quick Ulam spiral into that React todo list app you’re building.</p>
+        <p>Once I’ve managed that, I think it might be nice to be able to give viewers some control over the dimensions of the grid via inputs or sliders that represent possible dimensions. Another aim is to get the spiral into one of the JavaScript frameworks, and maybe into some component libraries. I mean, you <em class="italic">just never know</em> when you might need to pop a quick Ulam spiral into that React todo list app you’re building.</p>
 
         <p>So, the project is far from over! I’m not even faintly eyeing up any other famous mathsy spirals and thinking about having a go at building them any time soon… </p>
 
